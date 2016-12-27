@@ -2,23 +2,27 @@
 
 class Autoloader{
 
+
+
     /**
      * Enregistre notre autoloader
      */
-    public static function register()
-    {
-        spl_autoload_register(array(__CLASS__, 'loadModeles'));
-        spl_autoload_register(array(__CLASS__, 'loadControleurs'));        
-        spl_autoload_register(array(__CLASS__, 'loadOutils'));
+    public static function register() {
+        // enregistre  les dépendances avec composer 
+        require_once 'vendor/autoload.php';
+
+        spl_autoload_register(array(__CLASS__, 'loadModels'));
+        spl_autoload_register(array(__CLASS__, 'loadControlers'));        
+        spl_autoload_register(array(__CLASS__, 'loadTools'));
     }
 
     /**
      * Inclue le fichier correspondant à notre classe
      * @param $class string Le nom de la classe à charger
      */
-    static function loadModeles($class)
+    static function loadModels($class)
     {
-        $file = "Modeles/".$class.'.php';
+        $file = "Models/".$class.'.php';
         if(file_exists($file)) {
             require_once $file;
         }
@@ -28,9 +32,9 @@ class Autoloader{
      * Inclue le fichier correspondant à notre classe
      * @param $class string Le nom de la classe à charger
      */
-    static function loadControleurs($class)
+    static function loadControlers($class)
     {
-        $file = "Controleurs/".$class.'.php';
+        $file = "Controlers/".$class.'.php';
         if(file_exists($file)) {
             require_once $file;
         }
@@ -40,12 +44,13 @@ class Autoloader{
      * Inclue le fichier correspondant à notre classe
      * @param $class string Le nom de la classe à charger
      */
-    static function loadOutils($class)
+    static function loadTools($class)
     {
-        $file = "Outils/".$class.'.php';
+        $file = "Tools/".$class.'.php';
         if(file_exists($file)) {
             require_once $file;
         }
     }
 
 }
+
