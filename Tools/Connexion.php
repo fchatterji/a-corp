@@ -1,9 +1,9 @@
 <?php
 
-class Connexion
-{
-    public static function init()
-    {
+class Connexion {
+    
+    public static function init() {
+
         try {
             $host = "127.0.0.1";
             $user = "root";

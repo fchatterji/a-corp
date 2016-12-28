@@ -2,8 +2,6 @@
 
 class Autoloader{
 
-
-
     /**
      * Enregistre notre autoloader
      */
@@ -11,6 +9,7 @@ class Autoloader{
         // enregistre  les dépendances avec composer 
         require_once 'vendor/autoload.php';
 
+        // enregistre toutes les classes utilisées
         spl_autoload_register(array(__CLASS__, 'loadModels'));
         spl_autoload_register(array(__CLASS__, 'loadControlers'));        
         spl_autoload_register(array(__CLASS__, 'loadTools'));
