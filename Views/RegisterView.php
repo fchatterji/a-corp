@@ -1,5 +1,3 @@
-<?php include "header.php";?>
-
 <form action="index.php?submenu=register" method="post">
 
     <label for="password">Email:</label>
@@ -13,6 +11,4 @@
 
     <input type="submit" value="Submit">
 </form>
-
-<?php include "footer.php";?>
 
