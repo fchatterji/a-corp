@@ -3,58 +3,51 @@
 class Router {
 
     static $submenu;
-    static $action;
-    static $defaultRoute = "http://localhost:8080/a-corp/index.php?submenu=home&action=get";
-    static $loginRoute = "http://localhost:8080/a-corp/index.php?submenu=user&action=login";
-
-
-    public static function parseUrl() {
-        if (isset($_GET['submenu'])) {
-            self::$submenu = $_GET['submenu'];
-        } else {
-            header("Location: ".self::$defaultRoute);
-            exit();
-        } 
-
-        if (isset($_GET['action'])) {
-            self::$action = $_GET['action'];
-        } else {
-            header("Location: ".self::$defaultRoute);
-            exit();
-        }       
-    }
-
-
-
+    static $defaultRoute = "http://localhost:8080/a-corp/index.php?submenu=home";
+    static $loginRoute = "http://localhost:8080/a-corp/index.php?submenu=login";
+    static $service;
 
     public static function route() {
 
-        $dbh = new PDO("mysql:host=127.0.0.1;dbname=phpauth", "root", "");
-        $config = new PHPAuth\Config($dbh);
-        $auth   = new PHPAuth\Auth($dbh, $config);
+        self::$service = self::getAuthService();
+        self::$submenu = self::getSubmenuFromUrl();
 
-        if (!$auth->isLogged()) {
-            //header("Location: ".self::$loginRoute);
-            //exit();
-        }
+        echo 'submenu'.self::$submenu;
 
-        self::parseUrl();
+        // vérifier si l'utilisateur est loggé. Si non, rediriger vers la page de login
+        self::isLoggedInOrRedirect();
 
+        // vérifier si le sous-menu existe, sinon rediriger à la page d'accueil
         $controlerName = ucfirst(self::$submenu)."Controler";
-        $action = self::$action;
-
         if(class_exists($controlerName)) {
             $controler = new $controlerName;
         } else {
             header("Location: ".self::$defaultRoute);
             die();
         }
+    }
 
-        if(is_callable(array($controler, $action))) {
-            $controler->$action();
+    public static function getAuthService() {
+        return new AuthService();
+    }
+
+    public static function getSubmenuFromUrl() {
+        if (isset($_GET['submenu'])) {
+            return $_GET['submenu'];
         } else {
-            header("Location: ".self::$defaultRoute);
-            die();
+            return 'home';
+        } 
+    }
+
+    public static function isLoggedInOrRedirect() {
+
+        if (self::$service->isLogged()) {
+
+        } elseif (self::$submenu === "login") {
+
+        } else {
+            header("Location: ".self::$loginRoute);
+            exit();
         }
     }
 }

@@ -10,4 +10,10 @@
 </head>
 
 <body>
+    <br>
+    <a href="index.php?submenu=home">home</a>
+    <a href="index.php?submenu=login">login</a>
+    <a href="index.php?submenu=logout">logout</a>
+    <a href="index.php?submenu=register">register</a>
+    <br>
 

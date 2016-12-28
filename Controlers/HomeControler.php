@@ -1,11 +1,12 @@
 <?php
 class HomeControler {
-    
+
     public function __construct() {
+        $this->get();
     }
 
     public function get() {
-        include("views/Home.php");
+        include("Views/HomeView.php");
     }
 }
 
