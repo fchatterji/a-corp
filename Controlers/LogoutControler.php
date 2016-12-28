@@ -22,7 +22,7 @@ class LogoutControler {
 
         $boolean = $this->service->logout($_COOKIE["authID"]);
         var_dump($boolean);
-        header("Location: http://localhost:8080/a-corp/index.php?submenu=login");
+        header("Location: http://localhost:8080/a-corp/login");
         exit();
     }
 }

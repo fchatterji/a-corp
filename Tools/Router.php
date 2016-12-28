@@ -3,8 +3,8 @@
 class Router {
 
     static $submenu;
-    static $defaultRoute = "http://localhost:8080/a-corp/index.php?submenu=home";
-    static $loginRoute = "http://localhost:8080/a-corp/index.php?submenu=login";
+    static $defaultRoute = "http://localhost:8080/a-corp/home";
+    static $loginRoute = "http://localhost:8080/a-corp/login";
     static $service;
 
     public static function route() {

@@ -1,4 +1,4 @@
-<form action="index.php?submenu=login" method="post">
+<form action="login" method="post">
     <label for="email">Email:</label>
     <input type="text" name="email" id="email" value="test.test@gmail.com">
     <label for="password">Password:</label>

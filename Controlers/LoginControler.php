@@ -21,7 +21,7 @@ class LoginControler {
     public function post() {
         $array = $this->service->login($_POST['email'], $_POST['password'], false);
         setcookie("authID", $array["hash"]);
-        header("Location: http://localhost:8080/a-corp/index.php?submenu=home");
+        header("Location: http://localhost:8080/a-corp/home");
         exit();
     }
 }

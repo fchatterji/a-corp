@@ -16,10 +16,10 @@ Autoloader::register();
 <body>
     <header>
         <br>
-        <a href="index.php?submenu=home">home</a>
-        <a href="index.php?submenu=login">login</a>
-        <a href="index.php?submenu=logout">logout</a>
-        <a href="index.php?submenu=register">register</a>
+        <a href="home">home</a>
+        <a href="login">login</a>
+        <a href="logout">logout</a>
+        <a href="register">register</a>
         <br>
     </header>
 
