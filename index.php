@@ -20,6 +20,7 @@ Autoloader::register();
         <a href="login">login</a>
         <a href="logout">logout</a>
         <a href="register">register</a>
+        <a href="sallelist">liste des salles</a>
         <br>
     </header>
 
