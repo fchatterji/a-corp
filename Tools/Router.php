@@ -2,7 +2,7 @@
 
 class Router {
 
-    static $submenu;
+    static $menu;
     static $defaultRoute = "http://localhost:8080/a-corp/home";
     static $loginRoute = "http://localhost:8080/a-corp/login";
     static $service;
@@ -10,15 +10,13 @@ class Router {
     public static function route() {
 
         self::$service = self::getAuthService();
-        self::$submenu = self::getSubmenuFromUrl();
-
-        echo 'submenu'.self::$submenu;
+        self::$menu = self::getMenuFromUrl();
+        $controlerName = ucfirst(self::$menu)."Controler";
 
         // vérifier si l'utilisateur est loggé. Si non, rediriger vers la page de login
         self::isLoggedInOrRedirect();
 
         // vérifier si le sous-menu existe, sinon rediriger à la page d'accueil
-        $controlerName = ucfirst(self::$submenu)."Controler";
         if(class_exists($controlerName)) {
             $controler = new $controlerName;
         } else {
@@ -31,9 +29,9 @@ class Router {
         return new AuthService();
     }
 
-    public static function getSubmenuFromUrl() {
-        if (isset($_GET['submenu'])) {
-            return $_GET['submenu'];
+    public static function getMenuFromUrl() {
+        if (isset($_GET['menu'])) {
+            return $_GET['menu'];
         } else {
             return 'home';
         } 
@@ -43,7 +41,7 @@ class Router {
 
         if (self::$service->isLogged()) {
 
-        } elseif (self::$submenu === "login") {
+        } elseif (self::$menu === "login") {
 
         } else {
             header("Location: ".self::$loginRoute);

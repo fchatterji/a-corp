@@ -2,6 +2,6 @@
 RewriteEngine on
 
 # Rewrite for index.php?submenu=xxxx
-RewriteRule ^([0-9a-zA-Z]+)/?$ index.php?submenu=$1 [NC,L]
+RewriteRule ^([0-9a-zA-Z]+)/?$ index.php?menu=$1 [NC,L]
 
 
