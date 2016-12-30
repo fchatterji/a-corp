@@ -1,5 +1,7 @@
 {
     "require": {
-        "phpauth/phpauth": "^1.1"
+        "phpauth/phpauth": "^1.1",
+        "klein/klein": "^2.1",
+        "bramus/router": "~1."
     }
 }

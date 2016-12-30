@@ -3,16 +3,11 @@
 class LoginControler {
     // un contrôleur par url
     var $service;
-    
+
     public function __construct() {
         $this->service = new AuthService();
-
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $this->get();
-        } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        	$this->post();
-        }
     }
+
 
     public function get() {
     	include("views/LoginView.php");

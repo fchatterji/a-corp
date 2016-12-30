@@ -1,7 +1,8 @@
-# Turn rewrite engine on
-RewriteEngine on
+<IfModule mod_rewrite.c>
+    Options -MultiViews
 
-# Rewrite for index.php?submenu=xxxx
-RewriteRule ^([0-9a-zA-Z]+)/?$ index.php?menu=$1 [NC,L]
-
-
+    RewriteEngine On
+    RewriteBase /a-corp/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

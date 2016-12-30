@@ -6,7 +6,6 @@ class SalleListControler {
     
     public function __construct() {
     	$this->service = new SalleService();
-        $this->get();
     }
 
     public function get() {
