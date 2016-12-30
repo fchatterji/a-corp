@@ -19,8 +19,8 @@ class SalleService {
     	return $stmt;
     }
 
-    public function getSalleByID($id) {
-    	$stmt = $this->$connection->prepare("SELECT * FROM salle WHERE id=:id");
+    public function getSalleById($id) {
+    	$stmt = $this->connection->prepare("SELECT * FROM salle WHERE id=:id");
     	$stmt->bindParam(':id', $id);
     	$stmt->execute();
 
@@ -31,7 +31,7 @@ class SalleService {
     }
 
     public function createSalle($name, $places) {
-    	$stmt = $this->$connection->prepare("INSERT INTO salle (id, name, places) VALUES (NULL, :places, :name)");
+    	$stmt = $this->connection->prepare("INSERT INTO salle (id, name, places) VALUES (NULL, :name, :places)");
     	$stmt->bindParam(':name', $name);
     	$stmt->bindParam(':places', $places);
     	$stmt->execute();
@@ -43,7 +43,7 @@ class SalleService {
     }
 
     public function updateSalle($id, $name, $places) {
-    	$stmt = $this->$connection->prepare("UPDATE salle SET name=:name, places=:places WHERE id=:id");
+    	$stmt = $this->connection->prepare("UPDATE salle SET name=:name, places=:places WHERE id=:id");
     	$stmt->bindParam(':id', $id);
     	$stmt->bindParam(':name', $name);
     	$stmt->bindParam(':places', $places);
@@ -56,7 +56,7 @@ class SalleService {
     }
 
     public function deleteSalle($id) {
-    	$stmt = $this->$connection->prepare("DELETE FROM salle WHERE id=:id");
+    	$stmt = $this->connection->prepare("DELETE FROM salle WHERE id=:id");
     	$stmt->bindParam(':id', $id);
     	$stmt->execute();
 
