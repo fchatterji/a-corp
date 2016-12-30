@@ -1,3 +1,5 @@
+<?php include "Partials/header.php"; ?>
+
 <?php $row = $salle->fetch(); ?>
 
 <table>
@@ -36,3 +38,4 @@
     <input type="submit" value="update">
 </form>
 
+<?php include "Partials/footer.php"; ?>

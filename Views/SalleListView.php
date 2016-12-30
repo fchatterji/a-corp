@@ -1,3 +1,5 @@
+<?php include "Partials/header.php"; ?>
+
 <table>
     <thead>
         <tr>
@@ -34,4 +36,6 @@
     <input type="number" name="places" id="places" value="10">
     <input type="submit" value="Submit">
 </form>
+
+<?php include "Partials/footer.php"; ?>
 

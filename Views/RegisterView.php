@@ -1,3 +1,5 @@
+<?php include "Partials/header.php"; ?>
+
 <form action="login" method="post">
 
     <label for="password">Email:</label>
@@ -11,4 +13,6 @@
 
     <input type="submit" value="Submit">
 </form>
+
+<?php include "Partials/footer.php"; ?>
 

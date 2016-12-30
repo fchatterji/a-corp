@@ -13,6 +13,7 @@ class Autoloader{
         spl_autoload_register(array(__CLASS__, 'loadModels'));
         spl_autoload_register(array(__CLASS__, 'loadControlers'));        
         spl_autoload_register(array(__CLASS__, 'loadTools'));
+        spl_autoload_register(array(__CLASS__, 'loadPartials'));
     }
 
     /**
@@ -46,6 +47,18 @@ class Autoloader{
     static function loadTools($class)
     {
         $file = "Tools/".$class.'.php';
+        if(file_exists($file)) {
+            require_once $file;
+        }
+    }
+
+    /**
+     * Inclue le fichier correspondant à notre classe
+     * @param $class string Le nom de la classe à charger
+     */
+    static function loadPartials($class)
+    {
+        $file = "Partials/".$class.'.php';
         if(file_exists($file)) {
             require_once $file;
         }
