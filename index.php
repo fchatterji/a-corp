@@ -75,11 +75,42 @@ $router->post('/salle/delete/(\d+)', function($id) {
     $controler->delete($id);
 });
 
+$router->get('/reservations(/[a-z0-9_-]+)?', function($date = null) { 
+    preventAccessIfNotLoggedIn();
+    $controler = new ReservationListControler();
+    $controler->getByDay($date);
+});
+
+$router->get('/reservation/(\d+)', function($id) { 
+    preventAccessIfNotLoggedIn();
+    $controler = new ReservationDetailControler();
+    $controler->get($id);
+});
+
+$router->post('/reservation/create', function() { 
+    preventAccessIfNotLoggedIn();
+    $controler = new ReservationDetailControler();
+    $controler->post();
+});
+
+$router->post('/reservation/update/(\d+)', function($id) {
+    preventAccessIfNotLoggedIn();
+    $controler = new ReservationDetailControler();
+    $controler->put($id);
+});
+
+$router->post('/reservation/delete/(\d+)', function($id) { 
+    preventAccessIfNotLoggedIn();
+    $controler = new ReservationDetailControler();
+    $controler->delete($id);
+});
+
 // Run it!
 $router->run();
 
 
 function preventAccessIfNotLoggedIn() {
+    echo 'test';
     $service = new AuthService();
     if (!$service->isLogged()) {
         header("Location: localhost:8080/a-corp/login");
@@ -87,5 +118,4 @@ function preventAccessIfNotLoggedIn() {
     } 
 }
 ?>
-
 
