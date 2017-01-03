@@ -1,4 +1,5 @@
 <?php include "Partials/header.php"; ?>
+<?php include "Partials/loggedInNav.php"; ?>
 
 <table>
     <thead>
@@ -10,22 +11,22 @@
         </tr>
     </thead>
     <tbody>
-        <?php while ($row = $salleList->fetch()): ?>
+        <?php foreach ($salleList as $salle): ?>
         <tr>
             <td>
-                <?php echo htmlspecialchars($row['id']) ?>
+                <?php echo htmlspecialchars($salle['id']) ?>
             </td>
             <td>
-                <?php echo htmlspecialchars($row['name']); ?>
+                <?php echo htmlspecialchars($salle['name']); ?>
             </td>
             <td>
-                <?php echo htmlspecialchars($row['places']); ?>
+                <?php echo htmlspecialchars($salle['places']); ?>
             </td>
             <td>
-                <a href="<?php echo "salle/".htmlspecialchars($row['id']) ?>">link</a>
+                <a href="<?php echo "salle/".htmlspecialchars($salle['id']) ?>">link</a>
             </td>
         </tr>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
     </tbody>
 </table>
 

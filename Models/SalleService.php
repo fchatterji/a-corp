@@ -15,8 +15,9 @@ class SalleService {
 
     	// set the resulting array to associative
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetchall();
 
-    	return $stmt;
+        return $result;
     }
 
     public function getSalleById($id) {
@@ -26,8 +27,9 @@ class SalleService {
 
     	// set the resulting array to associative
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetch();
 
-    	return $stmt; 	
+        return $result;
     }
 
     public function createSalle($name, $places) {
@@ -35,11 +37,6 @@ class SalleService {
     	$stmt->bindParam(':name', $name);
     	$stmt->bindParam(':places', $places);
     	$stmt->execute();
-
-    	// set the resulting array to associative
-    	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
-
-    	return $stmt;
     }
 
     public function updateSalle($id, $name, $places) {
@@ -47,23 +44,13 @@ class SalleService {
     	$stmt->bindParam(':id', $id);
     	$stmt->bindParam(':name', $name);
     	$stmt->bindParam(':places', $places);
-    	$stmt->execute();
-
-    	// set the resulting array to associative
-    	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
-
-    	return $stmt;   	
+    	$stmt->execute();	
     }
 
     public function deleteSalle($id) {
     	$stmt = $this->connection->prepare("DELETE FROM salle WHERE id=:id");
     	$stmt->bindParam(':id', $id);
     	$stmt->execute();
-
-    	// set the resulting array to associative
-    	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
-
-    	return $stmt;
     }
 }
 

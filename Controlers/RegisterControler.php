@@ -9,12 +9,13 @@ class RegisterControler {
     }
 
     public function get() {
-    	include("Views/RegisterView.php");
+    	include("Views/LoginView.php");
     }
 
     public function post() {
         $array = $this->service->register($_POST['email'], $_POST['password'], $_POST['repeatpassword']);
-        var_dump($array);	
+        header("Location: http://localhost:8080/a-corp/home");
+        exit();
     }
 }
 ?>

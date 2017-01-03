@@ -1,14 +1,13 @@
 <?php include "Partials/header.php"; ?>
+<?php include "Partials/loggedInNav.php"; ?>
 
-<?php $row = $reservation->fetch(); ?>
 
 <table>
     <thead>
         <tr>
             <th>id</th>
-            <th>id de la salle</th>
-            <th>debut</th>
-            <th>fin</th>
+            <th>salle</th>
+            <th>heure</th>
         </tr>
     </thead>
     <tbody>
@@ -18,13 +17,10 @@
                 <?php echo htmlspecialchars($row['id']) ?>
             </td>
             <td>
-                <?php echo htmlspecialchars($row['salleId']); ?>
+                <?php echo htmlspecialchars($row['salle']); ?>
             </td>
             <td>
-                <?php echo htmlspecialchars($row['debut']); ?>
-            </td>
-            <td>
-                <?php echo htmlspecialchars($row['fin']); ?>
+                <?php echo htmlspecialchars($row['hour']); ?>
             </td>
         </tr>
     </tbody>

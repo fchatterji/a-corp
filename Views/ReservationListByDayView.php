@@ -1,63 +1,90 @@
 <?php include "Partials/header.php"; ?>
+<?php include "Partials/loggedInNav.php"; ?>
 
-<p>input date:</p>
+
+
+<p>input day:</p>
 <input data-toggle="datepicker" id="datepicker">
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br>
+<br>
 
 
-<table>
+<div class="table-responsive">
+
+<table class="table table-hover table-striped">
     <thead>
-        <tr>
-            <th>id</th>
-            <th>id de la salle</th>
-            <th>debut sql</th>
-            <th>fin</th>
-            <th>link</th>
-        </tr>
+    
+    <tr>
+        <th>heure</th>
+        <?php foreach($salleList as $salle):?>
+        <th><?php echo $salle['name']?></th>
+        <?php endforeach; ?>
+    </tr> 
+    
     </thead>
+
     <tbody>
-        <?php while ($row = $reservationList->fetch()): ?>
-        <tr>
-            <td>
-                <?php echo htmlspecialchars($row['id']) ?>
-            </td>
-            <td>
-                <?php echo htmlspecialchars($row['salleId']); ?>
-            </td>
-            <td>
-                <?php echo htmlspecialchars($row['debut']); ?>
-            </td>
-            <td>
-                <?php echo htmlspecialchars($row['fin']); ?>
-            </td>
-            <td>
-                <a href="<?php echo "reservation/".htmlspecialchars($row['id']) ?>">link</a>
-            </td>
+        <?php foreach($reservationListByHour as $hour => $reservations): ?>
+        
+        <tr> 
+            <td><?php echo $hour; ?></td>
+            <?php foreach($reservations as $reservation): ?>  
+            <td><?php echo $reservation['id']?></td> 
+            <?php endforeach ?> 
         </tr>
-        <?php endwhile; ?>
+        <?php endforeach ?>
     </tbody>
 </table>
 
-<form action="reservation/create" method="post">
-    <label for="salleId">id de la salle:</label>
-    <input type="number" name="salleId" id="salleId" value="10">
-    <label for="debut">Debut:</label>
-    <input type="text" name="debut" id="debut" value="">
-    <label for="fin">Fin:</label>
-    <input type="text" name="fin" id="fin" value="">
+</div>
+
+
+
+
+<form action="/a-corp/reservation/create" method="post" id="reservationForm">
+
+<select name="salleId" id="salleId">
+    <?php foreach($salleList as $salle): ?>
+    <option value="<?php echo $salle['id'] ?>">
+        <?php echo $salle['name'] ?>
+    </option>
+    <?php endforeach ?>
+</select>
+
+<select name="hourId" id="hourId">
+    <?php foreach($possibleHoursList as $hour): ?>
+    <option value="<?php echo $hour['id'] ?>">
+        <?php echo $hour['hour'] ?>
+    </option>
+    <?php endforeach ?>
+</select>
+
+    <input type="hidden" name="day" value="<?php echo $day ?>">
     <input type="submit" value="Submit">
 </form>
 
-<script type="text/javascript">
-$('[data-toggle="datepicker"]').datepicker({
-	autoShow: 'true',
-    format: 'yyyy-mm-dd'
-});
 
-$( "#datepicker" ).change(function() {
-    var date = $('#datepicker').val();
-    window.location.href = "/a-corp/reservations/" + date;
-});
+
+
+
+
+<script type="text/javascript">
+    $('[data-toggle="datepicker"]').datepicker({
+        autoShow: 'true',
+        autoPick: 'true',
+        startDate: '<?php echo $day ?>',
+        format: 'yyyy-mm-dd',
+        weekStart: '1',
+        filter: function(date) {
+            if (date.getDay() === 0 || date.getDay() === 6) {
+                return false; // Disable all Sundays and Saturdays
+            }
+        }
+    });
+    $("#datepicker").change(function() {
+        var day = $('#datepicker').val();
+        window.location.href = "/a-corp/reservations/" + day;
+    });
 
 </script>
 

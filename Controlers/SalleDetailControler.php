@@ -14,19 +14,19 @@ class SalleDetailControler {
     }
 
     public function post() {
-        $stmt = $this->service->createSalle($_POST['name'], $_POST['places']);
+        $this->service->createSalle($_POST['name'], $_POST['places']);
         header("Location: http://localhost:8080/a-corp/salles");
         exit();	
     }
 
     public function put($id) {
-        $stmt = $this->service->updateSalle($id, $_POST['name'], $_POST['places']);
+        $this->service->updateSalle($id, $_POST['name'], $_POST['places']);
         header("Location: http://localhost:8080/a-corp/salles");
         exit();	
     }
 
     public function delete($id) {
-        $stmt = $this->service->deleteSalle($id);
+        $this->service->deleteSalle($id);
         header("Location: http://localhost:8080/a-corp/salles");
         exit();	
     }

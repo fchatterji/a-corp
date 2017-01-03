@@ -14,20 +14,20 @@ class ReservationDetailControler {
     }
 
     public function post() {
-        $stmt = $this->service->createReservation($_POST['salleId'], $_POST['debut'], $_POST['fin']);
-        header("Location: http://localhost:8080/a-corp/reservations");
+        $this->service->createReservation($_POST['salleId'], $_POST['day'], $_POST['hourId']);
+        header("Location: http://localhost:8080/a-corp/reservations/".date("Y-m-d"));
         exit();	
     }
 
     public function put($id) {
-        $stmt = $this->service->updateReservation($id, $_POST['salleId'], $_POST['debut'], $_POST['fin']);
-        header("Location: http://localhost:8080/a-corp/reservations");
+        $this->service->updateReservation($id, $_POST['salleId'], $_POST['day'], $_POST['hourId']);
+        header("Location: http://localhost:8080/a-corp/reservations/".date("Y-m-d"));
         exit();	
     }
 
     public function delete($id) {
-        $stmt = $this->service->deleteReservation($id);
-        header("Location: http://localhost:8080/a-corp/reservations");
+        $this->service->deleteReservation($id);
+        header("Location: http://localhost:8080/a-corp/reservations/".date("Y-m-d"));
         exit();	
     }
 }

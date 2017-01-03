@@ -15,79 +15,63 @@ class ReservationService {
 
     	// set the resulting array to associative
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetchall();
 
-    	return $stmt;
+    	return $result;
     }
 
-    public function getReservationsBySalle($salleId) {
-    	$stmt = $this->connection->prepare("SELECT * FROM reservation WHERE id=:id");
-    	$stmt->bindParam(':id', $salleId);
-    	$stmt->execute();
-
-    	// set the resulting array to associative
-    	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
-
-    	return $stmt;
-    }
-
-    public function getReservationsByDay($mysqldate) {
-        $stmt = $this->connection->prepare("SELECT * FROM reservation WHERE debut >= :mysqldate AND debut < :mysqldate + INTERVAL 1 DAY");
-        $stmt->bindParam(':mysqldate', $mysqldate);
+    public function getReservationsByDayAndHour($day, $hourId) {
+        $stmt = $this->connection->prepare("
+            SELECT filteredReservation.id
+            FROM salle 
+            LEFT JOIN (SELECT * FROM reservation WHERE reservation.day = :day AND reservation.hourId = :hourId) as filteredReservation 
+            ON salle.id = filteredReservation.salleId 
+            ORDER BY salle.name
+            ");
+        $stmt->bindParam(':day', $day);
+        $stmt->bindParam(':hourId', $hourId);
         $stmt->execute();
 
         // set the resulting array to associative
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetchall();
 
-        return $stmt;
+        return $result;
     }
 
     public function getReservationById($id) {
-    	$stmt = $this->connection->prepare("SELECT * FROM reservation WHERE id=:id");
+    	$stmt = $this->connection->prepare("SELECT possiblehours.hour, salle.name, reservation.id FROM reservation NATURAL JOIN salle NATURAL JOIN possiblehours WHERE id=:id");
     	$stmt->bindParam(':id', $id);
     	$stmt->execute();
 
     	// set the resulting array to associative
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetchall();
 
-    	return $stmt; 	
+        return $result;	
     }
 
-    public function createReservation($salleId, $debut, $fin) {
-    	$stmt = $this->connection->prepare("INSERT INTO reservation (id, salleId, debut, fin) VALUES (NULL, :salleId, :debut, :fin)");
+    public function createReservation($salleId, $day, $hourId) {
+    	$stmt = $this->connection->prepare("INSERT INTO reservation (id, salleId, day, hourId) VALUES (NULL, :salleId, :day, :hourId)");
     	$stmt->bindParam(':salleId', $salleId);
-    	$stmt->bindParam(':debut', $debut);
-    	$stmt->bindParam(':fin', $fin);
+    	$stmt->bindParam(':day', $day);
+    	$stmt->bindParam(':hourId', $hourId);
     	$stmt->execute();
-
-    	// set the resulting array to associative
-    	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
-
-    	return $stmt;
     }
 
-    public function updateReservation($id, $salleId, $debut, $fin) {
-    	$stmt = $this->connection->prepare("UPDATE reservation SET salleId=:salleId, debut=:debut, fin=:fin WHERE id=:id");
+    public function updateReservation($id, $salleId, $day, $hourId) {
+    	$stmt = $this->connection->prepare("UPDATE reservation SET salleId=:salleId, day=:day, hourId=:hourId WHERE id=:id");
     	$stmt->bindParam(':id', $id);
     	$stmt->bindParam(':salleId', $salleId);
-    	$stmt->bindParam(':debut', $debut);
-    	$stmt->bindParam(':fin', $fin);
-    	$stmt->execute();
-
-    	// set the resulting array to associative
-    	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
-
-    	return $stmt;   	
+    	$stmt->bindParam(':day', $day);
+    	$stmt->bindParam(':hourId', $hourId);
+    	$stmt->execute(); 	
     }
 
     public function deleteReservation($id) {
     	$stmt = $this->connection->prepare("DELETE FROM reservation WHERE id=:id");
     	$stmt->bindParam(':id', $id);
     	$stmt->execute();
-
-    	// set the resulting array to associative
-    	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
-
-    	return $stmt;
     }
 }
 
