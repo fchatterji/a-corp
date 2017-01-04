@@ -1,8 +1,10 @@
 <?php include "Partials/header.php"; ?>
 <?php include "Partials/loggedInNav.php"; ?>
 
-<?php foreach ($salleList as $salle): ?>
 <div class="row">
+<?php foreach ($salleList as $salle): ?>
+
+
     <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
             <div class="caption">
@@ -24,7 +26,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 <!-- Update modal -->
@@ -92,8 +94,9 @@
 
 
 <?php endforeach; ?>
+</div>
 
-<!-- Button trigger modal -->
+<!-- Button trigger for create salle modal -->
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ajouterSalleModal">
     Ajouter une salle
 </button>
