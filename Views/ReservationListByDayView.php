@@ -2,7 +2,7 @@
 <?php include "Partials/loggedInNav.php"; ?>
 
 <h1>Choisissez une date</h1>
-<input data-toggle="datepicker" id="datepicker" class="btn btn-primary">
+<input data-toggle="datepicker" id="datepicker" class="btn btn-default">
 
 <div class="table-responsive">
 
@@ -76,7 +76,7 @@
     });
     $("#datepicker").change(function() {
         var day = $('#datepicker').val();
-        window.location.href = "/a-corp/reservations/" + day;
+        window.location.href = "/reservations/" + day;
     });
 
 </script>

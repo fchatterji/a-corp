@@ -10,8 +10,8 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
     <!-- datepicker -->
-    <link href="/a-corp/datepicker/datepicker.css" rel="stylesheet">
-    <script src="/a-corp/datepicker/datepicker.js"></script>
+    <link href="/datepicker/datepicker.min.css" rel="stylesheet">
+    <script src="/datepicker/datepicker.min.js"></script>
 
     <!-- bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
