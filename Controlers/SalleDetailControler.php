@@ -10,24 +10,24 @@ class SalleDetailControler {
 
     public function get($id) {
         $salle = $this->service->getSalleById($id);
-        include("views/SalleDetailView.php");
+        include("Views/SalleDetailView.php");
     }
 
     public function post() {
         $this->service->createSalle($_POST['name'], $_POST['places']);
-        header("Location: http://localhost:8080/a-corp/salles");
+        header("Location: https://a-corp1.000webhostapp.com/salles");
         exit();	
     }
 
     public function put($id) {
         $this->service->updateSalle($id, $_POST['name'], $_POST['places']);
-        header("Location: http://localhost:8080/a-corp/salles");
+        header("Location: https://a-corp1.000webhostapp.com/salles");
         exit();	
     }
 
     public function delete($id) {
         $this->service->deleteSalle($id);
-        header("Location: http://localhost:8080/a-corp/salles");
+        header("Location: https://a-corp1.000webhostapp.com/salles");
         exit();	
     }
 }

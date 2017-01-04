@@ -10,13 +10,13 @@ class LoginControler {
 
 
     public function get() {
-    	include("views/LoginView.php");
+    	include("Views/LoginView.php");
     }
 
     public function post() {
         $array = $this->service->login($_POST['email'], $_POST['password'], false);
         setcookie("authID", $array["hash"]);
-        header("Location: http://localhost:8080/a-corp/home");
+        header("Location: https://a-corp1.000webhostapp.com/home");
         exit();
     }
 }

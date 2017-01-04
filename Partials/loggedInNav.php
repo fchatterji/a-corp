@@ -14,13 +14,13 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/a-corp/home">Accueil <span class="sr-only">(current)</span></a></li>
-                <li><a href="/a-corp/reservations/<?php echo date("Y-m-d") ?>">Réservations</a></li>
-                <li><a href="/a-corp/salles">Salles</a></li>
+                <li><a href="/home">Accueil <span class="sr-only">(current)</span></a></li>
+                <li><a href="/reservations/<?php echo date("Y-m-d") ?>">Réservations</a></li>
+                <li><a href="/salles">Salles</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/a-corp/logout">Logout</a></li>
+                <li><a href="/logout">Logout</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

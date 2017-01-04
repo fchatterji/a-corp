@@ -1,8 +1,13 @@
+# HTID:47191: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:47191:
+
+
 <IfModule mod_rewrite.c>
     Options -MultiViews
 
     RewriteEngine On
-    RewriteBase /a-corp/
+    RewriteBase /
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>

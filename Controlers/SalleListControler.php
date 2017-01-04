@@ -10,7 +10,7 @@ class SalleListControler {
 
     public function get() {
     	$salleList = $this->service->getSalles();
-    	include("views/SalleListView.php");
+    	include("Views/SalleListView.php");
     }
 }
 ?>

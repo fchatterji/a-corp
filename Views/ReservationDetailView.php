@@ -26,11 +26,11 @@
     </tbody>
 </table>
 
-<form action="<?php echo "delete/".htmlspecialchars($row['id']) ?>" method="post">
+<form action="<?php echo "/reservation/delete/".htmlspecialchars($row['id']) ?>" method="post">
     <input type="submit" value="delete" />
 </form>
 
-<form action="<?php echo "update/".htmlspecialchars($row['id']) ?>" method="post">
+<form action="<?php echo "/reservation/update/".htmlspecialchars($row['id']) ?>" method="post">
     <label for="salleId">id de la salle:</label>
     <input type="text" name="salleId" id="salleId" value="<?php echo htmlspecialchars($row['salleId']); ?>">
     <label for="debut">debut:</label>

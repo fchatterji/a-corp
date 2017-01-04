@@ -9,14 +9,13 @@ class LogoutControler {
     }
 
     public function get() {
-    	include("views/LogoutView.php");
+    	include("Views/LogoutView.php");
     }
 
     public function post() {
 
         $boolean = $this->service->logout($_COOKIE["authID"]);
-        var_dump($boolean);
-        header("Location: http://localhost:8080/a-corp/login");
+        header("Location: https://a-corp1.000webhostapp.com/login");
         exit();
     }
 }

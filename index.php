@@ -1,6 +1,6 @@
 <?php 
 // load classes and dependencies
-require_once "Tools\Autoloader.php";
+require_once "Tools/Autoloader.php";
 Autoloader::register();
 
 // Create Router instance
@@ -32,16 +32,6 @@ $router->get('/logout', function() {
 $router->post('/logout', function() { 
     preventAccessIfNotLoggedIn();
     $controler = new LogoutControler();
-    $controler->post();
-});
-
-$router->get('/register', function() { 
-    $controler = new RegisterControler();
-    $controler->get();
-});
-
-$router->post('/register', function() { 
-    $controler = new RegisterControler();
     $controler->post();
 });
 
@@ -111,11 +101,11 @@ $router->run();
 
 function preventAccessIfNotLoggedIn() {
     $authService = new AuthService();
-    
-    if (!$authService->isLogged()) {
-        header("Location: localhost:8080/a-corp/login");
-        exit();
-    } 
+    //if (!$authService->isLogged()) {
+    //    header('HTTP/1.0 403 Forbidden');
+    //    echo "Forbidden";
+    //    exit();
+    //}
 }
 ?>
 

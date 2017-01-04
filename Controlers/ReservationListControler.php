@@ -14,7 +14,7 @@ class ReservationListControler {
 
     public function get() {
     	$reservationList = $this->reservationService->getReservations();
-    	include("views/ReservationListView.php");
+    	include("Views/ReservationListView.php");
     }
 
     public function getByDay($day) {
@@ -39,7 +39,7 @@ class ReservationListControler {
         for ($i = 0; $i < $count; $i++) {
             $result = array_merge($result, array_column($reservationListByHour, $i));
         }
-    	include("views/ReservationListByDayView.php");
+    	include("Views/ReservationListByDayView.php");
     }
 }
 ?>

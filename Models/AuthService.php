@@ -14,7 +14,7 @@ class AuthService {
 
     public function __construct() {
         
-        $dbh = new PDO("mysql:host=127.0.0.1;dbname=phpauth", "root", "");
+        $dbh = new PDO("mysql:host=localhost;dbname=id463720_phpauth", "id463720_fchatterjiauth", "topsecre1");
         $config = new PHPAuth\Config($dbh);
         $this->auth   = new PHPAuth\Auth($dbh, $config);
     }

@@ -14,7 +14,7 @@ class RegisterControler {
 
     public function post() {
         $array = $this->service->register($_POST['email'], $_POST['password'], $_POST['repeatpassword']);
-        header("Location: http://localhost:8080/a-corp/home");
+        header("Location: https://a-corp1.000webhostapp.com/home");
         exit();
     }
 }

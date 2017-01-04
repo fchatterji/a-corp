@@ -25,11 +25,11 @@
     </tbody>
 </table>
 
-<form action="<?php echo "delete/".htmlspecialchars($salle['id']) ?>" method="post">
+<form action="<?php echo "/salle/delete/".htmlspecialchars($salle['id']) ?>" method="post">
     <input type="submit" value="delete" />
 </form>
 
-<form action="<?php echo "update/".htmlspecialchars($salle['id']) ?>" method="post">
+<form action="<?php echo "/salle/update/".htmlspecialchars($salle['id']) ?>" method="post">
     <label for="name">Name:</label>
     <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($salle['name']); ?>">
     <label for="places">Places:</label>
