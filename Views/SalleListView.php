@@ -12,13 +12,84 @@
                 </p>
 
                 <p>
-                    <a href="#" class="btn btn-primary" role="button">Modifier</a>
-                    <a href="#" class="btn btn-default" role="button">Supprimer</a>
+                    <!-- Button trigger update modal -->
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#updateSalleModal<?php echo $salle['id']?>">
+                    Modifier
+                    </button>
+                    <!-- Button trigger delete modal -->
+                    <button class="btn btn-default" data-toggle="modal" data-target="#deleteSalleModal<?php echo $salle['id']?>">
+                    Supprimer
+                    </button>
                 </p>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- Update modal -->
+<div class="modal fade" id="updateSalleModal<?php echo $salle['id']?>" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Modifier la salle
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                <form action="<?php echo "/salle/update/".htmlspecialchars($salle['id']) ?>" method="post">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($salle['name']); ?>">
+                    <label for="places">Places:</label>
+                    <input type="text" name="places" id="places" value="<?php echo htmlspecialchars($salle['places']); ?>">
+                    <input type="submit" value="update">
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Delete modal -->
+<div class="modal fade" id="deleteSalleModal<?php echo $salle['id']?>" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Voulez-vous vraiment supprimer la salle?
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+
+                <form action="/salle/delete/<?php echo $salle['id'] ?>" method="post">
+                    <button type="submit" class="btn btn-primary">Confirmer</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <?php endforeach; ?>
 
@@ -28,13 +99,13 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="ajouterSalleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="ajouterSalleModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
+                    <span>&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
                 <h4 class="modal-title" id="myModalLabel">
