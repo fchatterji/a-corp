@@ -21,16 +21,28 @@
         </thead>
 
         <tbody>
-            <?php foreach($reservationListByHour as $hour => $reservations): ?>
+            <?php foreach($reservationListByHour as $hour => $reservationList): ?>
 
             <tr>
                 <td>
                     <?php echo $hour; ?>
                 </td>
-                <?php foreach($reservations as $reservation): ?>
+                <?php foreach($reservationList as $reservation): ?>
                 <td>
-                    <?php echo isset($reservation['id']) ? 'test' : 'tost';?>
+                    <?php if (isset($reservation['id'])) { ?>
+                        <button class="btn btn-primary btn-default" data-toggle="modal" data-target="#modifyReservationModal<?php echo $reservation['id']?>">
+                        M
+                        </button>
+
+                    <?php } else { ?>
+                        <button class="btn btn-primary tn-default" data-toggle="modal" data-target="#createReservationModal<?php echo $reservation['id']?>">
+                        R
+                        </button>
+                    <?php }?>
                 </td>
+
+                <?php include "Partials/createReservationModal.php"; ?>
+                <?php include "Partials/modifyReservationModal.php"; ?>
                 <?php endforeach ?>
             </tr>
             <?php endforeach ?>
@@ -38,6 +50,9 @@
     </table>
 
 </div>
+
+
+
 
 <form action="/reservation/create" method="post" id="reservationForm">
 
@@ -58,6 +73,7 @@
     </select>
 
     <input type="hidden" name="day" value="<?php echo $day ?>">
+    <input type="hidden" name="userId" value="<?php echo $userId ?>">
     <input type="submit" value="Submit">
 </form>
 

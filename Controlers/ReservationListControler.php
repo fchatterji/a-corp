@@ -34,11 +34,6 @@ class ReservationListControler {
             $reservationListByHour[$hour['hour']] = $this->reservationService->getReservationsByDayAndHour($day, $hour['id']);
         }
 
-        $count = count($reservationListByHour);
-        $result = array();
-        for ($i = 0; $i < $count; $i++) {
-            $result = array_merge($result, array_column($reservationListByHour, $i));
-        }
     	include("Views/ReservationListByDayView.php");
     }
 }

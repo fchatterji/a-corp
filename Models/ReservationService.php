@@ -22,7 +22,7 @@ class ReservationService {
 
     public function getReservationsByDayAndHour($day, $hourId) {
         $stmt = $this->connection->prepare("
-            SELECT filteredReservation.id
+            SELECT *
             FROM salle 
             LEFT JOIN (SELECT * FROM reservation WHERE reservation.day = :day AND reservation.hourId = :hourId) as filteredReservation 
             ON salle.id = filteredReservation.salleId 
@@ -40,31 +40,48 @@ class ReservationService {
     }
 
     public function getReservationById($id) {
-    	$stmt = $this->connection->prepare("SELECT possiblehours.hour, salle.name, reservation.id FROM reservation NATURAL JOIN salle NATURAL JOIN possiblehours WHERE id=:id");
+    	$stmt = $this->connection->prepare("
+            SELECT *
+            FROM reservation 
+            JOIN salle ON reservation.salleId = salle.id 
+            JOIN possiblehours ON reservation.hourId = possiblehours.id 
+            WHERE reservation.id = :id 
+            ");
     	$stmt->bindParam(':id', $id);
     	$stmt->execute();
 
     	// set the resulting array to associative
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
-        $result = $stmt->fetchall();
+        $result = $stmt->fetch();
 
         return $result;	
     }
 
-    public function createReservation($salleId, $day, $hourId) {
-    	$stmt = $this->connection->prepare("INSERT INTO reservation (id, salleId, day, hourId) VALUES (NULL, :salleId, :day, :hourId)");
+    public function createReservation($salleId, $day, $hourId, $numGuests, $userId) {
+    	$stmt = $this->connection->prepare("
+            INSERT INTO reservation (id, salleId, day, hourId, numGuests, userId) 
+            VALUES (NULL, :salleId, :day, :hourId, :numGuests, :userId)
+            ");
     	$stmt->bindParam(':salleId', $salleId);
     	$stmt->bindParam(':day', $day);
     	$stmt->bindParam(':hourId', $hourId);
+        $stmt->bindParam(':numGuests', $numGuests);
+        $stmt->bindParam(':userId', $userId);
     	$stmt->execute();
     }
 
-    public function updateReservation($id, $salleId, $day, $hourId) {
-    	$stmt = $this->connection->prepare("UPDATE reservation SET salleId=:salleId, day=:day, hourId=:hourId WHERE id=:id");
+    public function updateReservation($id, $salleId, $day, $hourId, $numGuests, $userId) {
+    	$stmt = $this->connection->prepare("
+            UPDATE reservation 
+            SET salleId=:salleId, day=:day, hourId=:hourId, numGuests=:numGuests, userId=:userId 
+            WHERE id=:id
+            ");
     	$stmt->bindParam(':id', $id);
     	$stmt->bindParam(':salleId', $salleId);
     	$stmt->bindParam(':day', $day);
     	$stmt->bindParam(':hourId', $hourId);
+        $stmt->bindParam(':numGuests', $numGuests);
+        $stmt->bindParam(':userId', $userId);
     	$stmt->execute(); 	
     }
 
