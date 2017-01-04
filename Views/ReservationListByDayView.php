@@ -53,30 +53,6 @@
 
 
 
-
-<form action="/reservation/create" method="post" id="reservationForm">
-
-    <select name="salleId" id="salleId">
-        <?php foreach($salleList as $salle): ?>
-        <option value="<?php echo $salle['id'] ?>">
-            <?php echo $salle['name'] ?>
-        </option>
-        <?php endforeach ?>
-    </select>
-
-    <select name="hourId" id="hourId">
-        <?php foreach($possibleHoursList as $hour): ?>
-        <option value="<?php echo $hour['id'] ?>">
-            <?php echo $hour['hour'] ?>
-        </option>
-        <?php endforeach ?>
-    </select>
-
-    <input type="hidden" name="day" value="<?php echo $day ?>">
-    <input type="hidden" name="userId" value="<?php echo $userId ?>">
-    <input type="submit" value="Submit">
-</form>
-
 <script type="text/javascript">
     $('[data-toggle="datepicker"]').datepicker({
         autoShow: 'true',

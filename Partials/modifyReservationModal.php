@@ -45,10 +45,13 @@
                     </div>
 
                     <input type="hidden" name="userId" value="0">
-                    
+
                     <button type="submit" class="btn btn-primary">Modifer la réservation</button>
                 </form>
 
+                <form action="/reservation/delete/<?php echo $reservation['id'] ?>" method="post"> 
+                    <button type="submit" class="btn btn-warning">Supprimer la réservation</button>
+                </form>
             </div>
 
         </div>
