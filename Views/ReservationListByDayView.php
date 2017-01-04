@@ -67,6 +67,7 @@
         autoPick: 'true',
         startDate: '<?php echo date("Y-m-d"); ?>',
         format: 'yyyy-mm-dd',
+        date: '<?php echo $day ?>',
         weekStart: '1',
         filter: function(date) {
             if (date.getDay() === 0 || date.getDay() === 6) {
