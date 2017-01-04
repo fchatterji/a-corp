@@ -20,7 +20,14 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/logout">Logout</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <a href="/logout">Se déconnecter</a>
+                  </ul>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

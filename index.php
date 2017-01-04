@@ -7,11 +7,18 @@ Autoloader::register();
 $router = new \Bramus\Router\Router();
 
 // Define routes
+$router->get('/', function() { 
+    preventAccessIfNotLoggedIn();
+    header("Location: https://a-corp1.000webhostapp.com/home");
+});
+
+
 $router->get('/home', function() { 
     preventAccessIfNotLoggedIn();
     $controler = new HomeControler();
     $controler->get();
 });
+
 
 $router->get('/login', function() { 
     $controler = new LoginControler();
@@ -27,12 +34,6 @@ $router->get('/logout', function() {
     preventAccessIfNotLoggedIn();
     $controler = new LogoutControler();
     $controler->get();
-});
-
-$router->post('/logout', function() { 
-    preventAccessIfNotLoggedIn();
-    $controler = new LogoutControler();
-    $controler->post();
 });
 
 $router->get('/salles', function() { 
@@ -100,12 +101,15 @@ $router->run();
 
 
 function preventAccessIfNotLoggedIn() {
+    /*
     $authService = new AuthService();
-    //if (!$authService->isLogged()) {
-    //    header('HTTP/1.0 403 Forbidden');
-    //    echo "Forbidden";
-    //    exit();
-    //}
+    if (!$authService->isLogged()) {
+        header('HTTP/1.0 403 Forbidden');
+        echo "Forbidden";
+        exit();
+    }
+    */
 }
+
 ?>
 
