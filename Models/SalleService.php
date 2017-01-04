@@ -10,7 +10,10 @@ class SalleService {
     }
 
     public function getSalles() {
-    	$stmt = $this->connection->prepare("SELECT * FROM salle");
+    	$stmt = $this->connection->prepare("
+            SELECT * FROM salle
+            ORDER BY salle.name
+            ");
     	$stmt->execute();
 
     	// set the resulting array to associative
