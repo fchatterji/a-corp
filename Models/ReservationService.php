@@ -30,9 +30,8 @@ class ReservationService {
                 SELECT * 
                 FROM reservation 
                 WHERE reservation.day = :day 
-                AND reservation.hourId = :hourId) 
-                AS filteredReservation 
-            )
+                AND reservation.hourId = :hourId
+                ) AS filteredReservation 
             ON salle.id = filteredReservation.salleId 
             ORDER BY salle.name
             ");
@@ -66,11 +65,11 @@ class ReservationService {
         return $result;	
     }
 
-    public function createReservation($salleId, $day, $hourId, $numGuests, $userId) {
+    public function createReservation($salleId, $day, $hourId, $numGuests, $userId, $title) {
         /* insert a new reservation in the database */
     	$stmt = $this->connection->prepare("
-            INSERT INTO reservation (id, salleId, day, hourId, numGuests, userId) 
-            VALUES (NULL, :salleId, :day, :hourId, :numGuests, :userId)
+            INSERT INTO reservation (id, salleId, day, hourId, numGuests, userId, title) 
+            VALUES (NULL, :salleId, :day, :hourId, :numGuests, :userId, :title)
             ");
 
     	$stmt->bindParam(':salleId', $salleId);
@@ -78,14 +77,15 @@ class ReservationService {
     	$stmt->bindParam(':hourId', $hourId);
         $stmt->bindParam(':numGuests', $numGuests);
         $stmt->bindParam(':userId', $userId);
+        $stmt->bindParam(':title', $title);
     	$stmt->execute();
     }
 
-    public function updateReservation($id, $salleId, $day, $hourId, $numGuests, $userId) {
+    public function updateReservation($id, $salleId, $day, $hourId, $numGuests, $userId, $title) {
         /* update a reservation */
     	$stmt = $this->connection->prepare("
             UPDATE reservation 
-            SET salleId=:salleId, day=:day, hourId=:hourId, numGuests=:numGuests, userId=:userId 
+            SET salleId=:salleId, day=:day, hourId=:hourId, numGuests=:numGuests, userId=:userId, title=:title
             WHERE id=:id
             ");
 
@@ -95,6 +95,7 @@ class ReservationService {
     	$stmt->bindParam(':hourId', $hourId);
         $stmt->bindParam(':numGuests', $numGuests);
         $stmt->bindParam(':userId', $userId);
+        $stmt->bindParam(':title', $title);
     	$stmt->execute(); 	
     }
 
