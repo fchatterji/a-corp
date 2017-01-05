@@ -16,7 +16,7 @@ class RegisterControler {
     public function post() {
         /* register a user and redirect to home page */
         $array = $this->service->register($_POST['email'], $_POST['password'], $_POST['repeatPassword']);
-        header("Location: https://a-corp1.000webhostapp.com/home");
+        header("Location: https://a-corp1.000webhostapp.com/login");
         exit();
     }
 }
