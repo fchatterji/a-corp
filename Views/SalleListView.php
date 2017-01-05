@@ -49,9 +49,9 @@
 
                         <form action="<?php echo "/salle/update/".htmlspecialchars($salle['id']) ?>" method="post">
                             <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($salle['name']); ?>">
+                            <input type="text" required name="name" id="name" value="<?php echo htmlspecialchars($salle['name']); ?>">
                             <label for="places">Places:</label>
-                            <input type="text" name="places" id="places" value="<?php echo htmlspecialchars($salle['places']); ?>">
+                            <input type="number" required name="places" id="places" value="<?php echo htmlspecialchars($salle['places']); ?>">
                             <input type="submit" value="update">
                         </form>
 
@@ -119,12 +119,12 @@
                 <form action="/salle/create" method="post">
                     <div class="form-group">
                         <label for="name">Nom</label>
-                        <input type="text" name="name" id="name" value="test" class="form-control">
+                        <input type="text" required name="name" id="name" placeholder="Nom" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="places">Nombre de places</label>
-                        <input type="number" name="places" id="places" value="10" class="form-control">
+                        <input type="number" required name="places" id="places" placeholder="Nombre de places" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Ajouter une salle</button>
                 </form>
