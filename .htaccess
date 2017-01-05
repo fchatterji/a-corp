@@ -2,6 +2,8 @@
 php_value display_errors 1
 # DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:47191:
 
+php_flag zlib.output_compression On
+php_value zlib.output_compression_level 5
 
 <IfModule mod_rewrite.c>
     Options -MultiViews
@@ -11,3 +13,4 @@ php_value display_errors 1
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
