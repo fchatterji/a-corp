@@ -10,7 +10,7 @@ class SalleService {
         $this->connection = Connexion::init();
     }
 
-    public function getSalles() {
+    public function getSalleList() {
         /* get all salles */
     	$stmt = $this->connection->prepare("
             SELECT * FROM salle
