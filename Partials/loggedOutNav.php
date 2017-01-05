@@ -23,8 +23,6 @@
                 <li><a href="/login">Se connecter/S'inscrire</a></li>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container-fluid -->
 </nav>
 

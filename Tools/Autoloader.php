@@ -2,62 +2,46 @@
 
 class Autoloader{
 
-    /**
-     * Enregistre notre autoloader
-     */
     public static function register() {
-        // enregistre  les dépendances avec composer 
+        /* Register the autoloader */
+
+        // include all external packages
         require_once 'vendor/autoload.php';
 
-        // enregistre toutes les classes utilisées
+        // include all classses
         spl_autoload_register(array(__CLASS__, 'loadModels'));
         spl_autoload_register(array(__CLASS__, 'loadControlers'));        
         spl_autoload_register(array(__CLASS__, 'loadTools'));
         spl_autoload_register(array(__CLASS__, 'loadPartials'));
     }
 
-    /**
-     * Inclue le fichier correspondant à notre classe
-     * @param $class string Le nom de la classe à charger
-     */
-    static function loadModels($class)
-    {
+
+    static function loadModels($class) {
+        /* Include all models */
         $file = "Models/".$class.'.php';
         if(file_exists($file)) {
             require_once $file;
         }
     }
     
-    /**
-     * Inclue le fichier correspondant à notre classe
-     * @param $class string Le nom de la classe à charger
-     */
-    static function loadControlers($class)
-    {
+    static function loadControlers($class) {
+        /* Include all controlers */
         $file = "Controlers/".$class.'.php';
         if(file_exists($file)) {
             require_once $file;
         }
     }
     
-    /**
-     * Inclue le fichier correspondant à notre classe
-     * @param $class string Le nom de la classe à charger
-     */
-    static function loadTools($class)
-    {
+    static function loadTools($class) {
+        /* Include all tools */
         $file = "Tools/".$class.'.php';
         if(file_exists($file)) {
             require_once $file;
         }
     }
 
-    /**
-     * Inclue le fichier correspondant à notre classe
-     * @param $class string Le nom de la classe à charger
-     */
-    static function loadPartials($class)
-    {
+    static function loadPartials($class) {
+        /* Include all partials */
         $file = "Partials/".$class.'.php';
         if(file_exists($file)) {
             require_once $file;

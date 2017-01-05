@@ -7,7 +7,6 @@ Autoloader::register();
 $router = new \Bramus\Router\Router();
 
 // Define routes
-
 $router->get('/', function() { 
 
     $loginGuardControler = new LoginGuardControler();
@@ -56,8 +55,8 @@ $router->get('/salles', function() {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new SalleListControler();
-    $controler->get();
+    $controler = new SalleControler();
+    $controler->getSalleList();
 });
 
 $router->get('/salle/(\d+)', function($id) { 
@@ -65,8 +64,8 @@ $router->get('/salle/(\d+)', function($id) {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new SalleDetailControler();
-    $controler->get($id);
+    $controler = new SalleControler();
+    $controler->getSalle($id);
 });
 
 $router->post('/salle/create', function() { 
@@ -74,7 +73,7 @@ $router->post('/salle/create', function() {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new SalleDetailControler();
+    $controler = new SalleControler();
     $controler->post();
 });
 
@@ -83,7 +82,7 @@ $router->post('/salle/update/(\d+)', function($id) {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new SalleDetailControler();
+    $controler = new SalleControler();
     $controler->put($id);
 });
 
@@ -92,7 +91,7 @@ $router->post('/salle/delete/(\d+)', function($id) {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new SalleDetailControler();
+    $controler = new SalleControler();
     $controler->delete($id);
 });
 
@@ -101,17 +100,8 @@ $router->get('/reservations(/[a-z0-9_-]+)?', function($day= null) {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new ReservationListControler();
-    $controler->getByDay($day);
-});
-
-$router->get('/reservations', function() { 
-
-    $loginGuardControler = new LoginGuardControler();
-    $loginGuardControler->preventAccessIfNotLoggedIn();
-
-    $controler = new ReservationListControler();
-    $controler->getByDay($day);
+    $controler = new ReservationControler();
+    $controler->getReservationList($day);
 });
 
 $router->get('/reservation/(\d+)', function($id) { 
@@ -119,7 +109,7 @@ $router->get('/reservation/(\d+)', function($id) {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new ReservationDetailControler();
+    $controler = new ReservationControler();
     $controler->get($id);
 });
 
@@ -128,7 +118,7 @@ $router->post('/reservation/create', function() {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new ReservationDetailControler();
+    $controler = new ReservationControler();
     $controler->post();
 });
 
@@ -137,7 +127,7 @@ $router->post('/reservation/update/(\d+)', function($id) {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new ReservationDetailControler();
+    $controler = new ReservationControler();
     $controler->put($id);
 });
 
@@ -146,7 +136,7 @@ $router->post('/reservation/delete/(\d+)', function($id) {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new ReservationDetailControler();
+    $controler = new ReservationControler();
     $controler->delete($id);
 });
 

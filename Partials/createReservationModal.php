@@ -1,8 +1,10 @@
-<!-- Update modal -->
+
+<!-- Create reservation modal -->
 <div class="modal fade" id="createReservationModal<?php echo $reservation['id']?>" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <!-- Modal Header -->
+
+            <!-- Modal header -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span>&times;</span>
@@ -13,9 +15,8 @@
                 </h4>
             </div>
 
-            <!-- Modal Body -->
+            <!-- Modal body -->
             <div class="modal-body">
-
                 <form action="/reservation/create" method="post" id="reservationForm">
 
                     <select name="salleId" id="salleId">
@@ -40,10 +41,9 @@
                     <input type="hidden" name="day" value="<?php echo $day ?>">
                     <input type="hidden" name="userId" value="0">
                     <input type="submit" value="Submit">
+
                 </form>
-
             </div>
-
         </div>
     </div>
 </div>

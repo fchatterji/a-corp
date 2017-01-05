@@ -1,7 +1,9 @@
-<!-- Update reservation Modal -->
+
+<!-- Modify reservation Modal -->
 <div class="modal fade" id="modifyReservationModal<?php echo $reservation['id']?>" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
+
             <!-- Modal Header -->
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
@@ -15,7 +17,6 @@
 
             <!-- Modal Body -->
             <div class="modal-body">
-
                 <form action="/reservation/update/<?php echo $reservation['id'] ?>" method="post">
 
                     <select name="salleId" id="salleId">

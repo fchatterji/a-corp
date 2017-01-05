@@ -1,6 +1,10 @@
 <?php
 
 class PossibleHoursService {
+    /* Possible hours service
+
+    Possible hours is a set of all possible start dates
+    */
 
     var $connection;
 
@@ -10,10 +14,10 @@ class PossibleHoursService {
     }
 
     public function getPossibleHours() {
+        /* get all possible hours */
         $stmt = $this->connection->prepare("SELECT * FROM possiblehours");
         $stmt->execute();
 
-        // set the resulting array to associative
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 
         $result = $stmt->fetchall();
 

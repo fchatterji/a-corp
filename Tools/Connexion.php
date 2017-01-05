@@ -3,6 +3,7 @@
 class Connexion {
     
     public static function init() {
+        /* connect to the application database */
 
         try {
             $host = "localhost";

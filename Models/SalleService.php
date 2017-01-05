@@ -1,6 +1,7 @@
 <?php
 
 class SalleService {
+    /* Service for salle entities */
 
 	var $connection;
 
@@ -10,13 +11,14 @@ class SalleService {
     }
 
     public function getSalles() {
+        /* get all salles */
     	$stmt = $this->connection->prepare("
             SELECT * FROM salle
             ORDER BY salle.name
             ");
+
     	$stmt->execute();
 
-    	// set the resulting array to associative
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
         $result = $stmt->fetchall();
 
@@ -24,11 +26,12 @@ class SalleService {
     }
 
     public function getSalleById($id) {
+        /* get a single salle with the given id */
     	$stmt = $this->connection->prepare("SELECT * FROM salle WHERE id=:id");
+
     	$stmt->bindParam(':id', $id);
     	$stmt->execute();
 
-    	// set the resulting array to associative
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
         $result = $stmt->fetch();
 
@@ -36,14 +39,18 @@ class SalleService {
     }
 
     public function createSalle($name, $places) {
+        /* create a salle */
     	$stmt = $this->connection->prepare("INSERT INTO salle (id, name, places) VALUES (NULL, :name, :places)");
+
     	$stmt->bindParam(':name', $name);
     	$stmt->bindParam(':places', $places);
     	$stmt->execute();
     }
 
     public function updateSalle($id, $name, $places) {
+        /* update a salle */
     	$stmt = $this->connection->prepare("UPDATE salle SET name=:name, places=:places WHERE id=:id");
+
     	$stmt->bindParam(':id', $id);
     	$stmt->bindParam(':name', $name);
     	$stmt->bindParam(':places', $places);
@@ -51,7 +58,9 @@ class SalleService {
     }
 
     public function deleteSalle($id) {
+        /* delete a salle */
     	$stmt = $this->connection->prepare("DELETE FROM salle WHERE id=:id");
+
     	$stmt->bindParam(':id', $id);
     	$stmt->execute();
     }

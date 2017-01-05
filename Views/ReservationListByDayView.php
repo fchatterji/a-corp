@@ -7,44 +7,46 @@
 
     <table class="table">
         <thead>
-
             <tr>
                 <th>heure</th>
                 <?php foreach($salleList as $salle):?>
-                <th>
-                    <?php echo $salle['name']?>
-                </th>
+                    <th>
+                        <?php echo $salle['name']?>
+                    </th>
                 <?php endforeach; ?>
             </tr>
-
         </thead>
 
         <tbody>
             <?php foreach($reservationListByHour as $hour => $reservationList): ?>
 
-            <tr>
-                <td>
-                    <?php echo $hour; ?>
-                </td>
-                <?php foreach($reservationList as $reservation): ?>
-                <?php if (isset($reservation['id'])) { ?>
-                <td class="success">
-                    <a href="#" data-toggle="modal" data-target="#modifyReservationModal<?php echo $reservation['id']?>">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </a>
-                </td>
-                <?php } else { ?>
-                <td class="warning">
-                    <a href="#" data-toggle="modal" data-target="#createReservationModal<?php echo $reservation['id']?>">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </a>
-                </td>
-                <?php }?>
+                <tr>
+                    <td>
+                        <?php echo $hour; ?>
+                    </td>
 
-                <?php include "Partials/createReservationModal.php"; ?>
-                <?php include "Partials/modifyReservationModal.php"; ?>
-                <?php endforeach ?>
-            </tr>
+                    <?php foreach($reservationList as $reservation): ?>
+
+                        <?php if (isset($reservation['id'])) { ?>
+                        <td class="success">
+                            <a href="#" data-toggle="modal" data-target="#modifyReservationModal<?php echo $reservation['id']?>">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </a>
+                        </td>
+
+                        <?php } else { ?>
+                        <td class="warning">
+                            <a href="#" data-toggle="modal" data-target="#createReservationModal<?php echo $reservation['id']?>">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                        <?php }?>
+
+                        <?php include "Partials/createReservationModal.php"; ?>
+                        <?php include "Partials/modifyReservationModal.php"; ?>
+
+                    <?php endforeach ?>
+                </tr>
             <?php endforeach ?>
         </tbody>
     </table>
@@ -54,6 +56,7 @@
 
 
 <script type="text/javascript">
+
     $('[data-toggle="datepicker"]').datepicker({
         autoPick: 'true',
         startDate: '<?php echo date("Y-m-d"); ?>',
@@ -66,6 +69,7 @@
             }
         }
     });
+    
     $("#datepicker").change(function() {
         var day = $('#datepicker').val();
         window.location.href = "/reservations/" + day;
