@@ -1,6 +1,6 @@
 <?php
 
-class SalleDetailControler {
+class SalleControler {
     /* Handle requests that concern salle entities */
     var $service;
     
@@ -16,7 +16,7 @@ class SalleDetailControler {
 
     public function getSalleList() {
         /* display a list of salles */
-        $salleList = $this->service->getSalles();
+        $salleList = $this->service->getSalleList();
         include("Views/SalleListView.php");
     }
 

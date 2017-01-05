@@ -95,7 +95,7 @@ $router->post('/salle/delete/(\d+)', function($id) {
     $controler->delete($id);
 });
 
-$router->get('/reservations(/[a-z0-9_-]+)?', function($day= null) { 
+$router->get('/reservations/([a-z0-9_-]+)', function($day) { 
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
