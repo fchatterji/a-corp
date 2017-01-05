@@ -16,7 +16,7 @@ class AuthService {
         
         $dbh = new PDO("mysql:host=localhost;dbname=id463720_phpauth", "id463720_fchatterjiauth", "topsecre1");
         $config = new PHPAuth\Config($dbh);
-        $this->auth   = new PHPAuth\Auth($dbh, $config);
+        $this->auth = new PHPAuth\Auth($dbh, $config);
     }
 
     public function isLogged() {
@@ -33,6 +33,11 @@ class AuthService {
 
     public function register($email, $password, $repeatpassword) {
     	return $this->auth->register($email, $password, $repeatpassword);
+    }
+
+    public function getUserId() {
+        $hash = $_COOKIE[$this->config->cookie_name];
+        return $this->auth->getSessionUID($hash);
     }
 }
 

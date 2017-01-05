@@ -12,20 +12,19 @@ class ReservationListControler {
         $this->possibleHoursService = new PossibleHoursService();
     }
 
-    public function get() {
-    	$reservationList = $this->reservationService->getReservations();
-    	include("Views/ReservationListView.php");
-    }
-
     public function getByDay($day) {
+
+        if ($day === null) {
+            $day = date("Y-m-d");
+        } else {
+            $day = $day;
+        }
 
         // get possible hours from possible hours service
         $possibleHoursList = $this->possibleHoursService->getPossibleHours();
 
         // get list of salles from salle service
         $salleList = $this->salleService->getSalles();
-
-        $day = $day;
 
         $reservationListByHour = array();
 

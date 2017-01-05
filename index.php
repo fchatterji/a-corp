@@ -66,7 +66,13 @@ $router->post('/salle/delete/(\d+)', function($id) {
     $controler->delete($id);
 });
 
-$router->get('/reservations/([a-z0-9_-]+)?', function($day) { 
+$router->get('/reservations(/[a-z0-9_-]+)?', function($day= null) { 
+    preventAccessIfNotLoggedIn();
+    $controler = new ReservationListControler();
+    $controler->getByDay($day);
+});
+
+$router->get('/reservations', function() { 
     preventAccessIfNotLoggedIn();
     $controler = new ReservationListControler();
     $controler->getByDay($day);
@@ -101,14 +107,15 @@ $router->run();
 
 
 function preventAccessIfNotLoggedIn() {
-    /*
+    
     $authService = new AuthService();
     if (!$authService->isLogged()) {
         header('HTTP/1.0 403 Forbidden');
-        echo "Forbidden";
+        include "Views/403View.php";
         exit();
+
     }
-    */
+    
 }
 
 ?>

@@ -15,7 +15,7 @@ class LoginControler {
 
     public function post() {
         $array = $this->service->login($_POST['email'], $_POST['password'], false);
-        setcookie("authID", $array["hash"]);
+        setcookie('authID', $array["hash"]);
         header("Location: https://a-corp1.000webhostapp.com/home");
         exit();
     }
