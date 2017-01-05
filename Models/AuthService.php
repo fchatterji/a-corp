@@ -12,12 +12,14 @@ class AuthService {
 	*/
 
     var $auth;
+    var $connection;
+    var $config;
 
     public function __construct() {
         
-        $dbh = new PDO("mysql:host=localhost;dbname=id463720_phpauth", "id463720_fchatterjiauth", "topsecre1");
-        $config = new PHPAuth\Config($dbh);
-        $this->auth = new PHPAuth\Auth($dbh, $config);
+        $this->connection = Connexion::init();
+        $this->config = new PHPAuth\Config($this->connection);
+        $this->auth = new PHPAuth\Auth($this->connection, $this->config);
     }
 
     public function isLogged() {
