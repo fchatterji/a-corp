@@ -13,7 +13,7 @@ class RegisterControler {
     }
 
     public function post() {
-        $array = $this->service->register($_POST['email'], $_POST['password'], $_POST['repeatpassword']);
+        $array = $this->service->register($_POST['email'], $_POST['password'], $_POST['repeatPassword']);
         header("Location: https://a-corp1.000webhostapp.com/home");
         exit();
     }
