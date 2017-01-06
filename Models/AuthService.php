@@ -32,6 +32,18 @@ class AuthService {
     	return $this->auth->isLogged();
     }
 
+    public function isAdmin() {
+        $userId = $this->getUserId();
+        $stmt = $this->connection->prepare("SELECT isadmin FROM users WHERE id=:id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetch();
+
+        return $result;
+    }
+
     public function login($email, $password, $remember) {
         /* Authenticates a user with the system.
 

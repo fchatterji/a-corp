@@ -1,6 +1,6 @@
 <?php
 
-class LoginGuardControler {
+class AdminGuardControler {
 	/* prevents acess to pages if the user is not logged in */
     var $service;
 
@@ -8,14 +8,13 @@ class LoginGuardControler {
         $this->service = new AuthService();
     }
 
-    public function preventAccessIfNotLoggedIn() {
+    public function preventAccessIfNotAdmin() {
     	/* if the user is not logged in, redirect him to 403 page */
-    	if (!$this->service->isLogged()) {
+    	if (!$this->service->isAdmin()) {
     		header('HTTP/1.0 403 Forbidden');
-    		include "Views/403NotLoggedInView.php";
+    		include "Views/403NotAdminView.php";
     		exit();
     	}
     }
 }
 ?>
-

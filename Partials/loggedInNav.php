@@ -16,7 +16,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/home">Accueil <span class="sr-only">(current)</span></a></li>
                 <li><a href="/reservations/<?php echo date("Y-m-d") ?>">Réservations</a></li>
-                <li><a href="/salles">Salles</a></li>
+                <li><a href="/salles"><span class="glyphicon glyphicon-lock"></span> Salles</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

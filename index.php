@@ -52,6 +52,9 @@ $router->get('/logout', function() {
 
 $router->get('/salles', function() { 
 
+    $adminGuardControler = new AdminGuardControler();
+    $adminGuardControler->preventAccessIfNotAdmin();
+
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
