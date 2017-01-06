@@ -23,10 +23,10 @@
 
                         <form id="login-form" action="/login" method="post" role="form" style="display: block;">
                             <div class="form-group">
-                                <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="test.test@gmail.com">
+                                <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Adresse e-mail">
                             </div>
                             <div class="form-group">
-                                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Topsecre1@">
+                                <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Mot de passe">
                             </div>
                             <div class="form-group text-center">
                                 <input type="checkbox" tabindex="3" class="" name="remember" id="remember">

@@ -151,7 +151,7 @@
                         <input type="text" name="day" id="day" class="form-control">
                     </div>
 
-                    <input type="hidden" name="userId">
+                    <input type="hidden" name="userId" id="userId">
 
                     <button type="submit" class="btn btn-primary">Créer la réservation</button>
 
@@ -223,7 +223,7 @@
                         <input type="text" name="day" id="day" class="form-control">
                     </div>
 
-                    <input type="hidden" name="userId">
+                    <input type="hidden" name="userId" id="userId">
 
                     <button type="submit" class="btn btn-primary">Modifier la réservation</button>
 
@@ -249,7 +249,7 @@
 
         var modal = $(this);
 
-        $("#hourId option").filter(function() {
+        modal.find("#hourId option").filter(function() {
             return this.text == currentHour; 
         }).attr('selected', true);
 
@@ -278,7 +278,7 @@
 
         var modal = $(this);
 
-        $("#hourId option").filter(function() {
+        modal.find("#hourId option").filter(function() {
             return this.text == currentHour; 
         }).attr('selected', true);
 
