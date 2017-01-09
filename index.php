@@ -1,4 +1,8 @@
 <?php 
+
+// start a session
+session_start();
+
 // load classes and dependencies
 require_once "Tools/Autoloader.php";
 Autoloader::register();

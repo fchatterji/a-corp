@@ -65,8 +65,16 @@ class ReservationService {
         return $result;	
     }
 
-    public function createReservation($salleId, $day, $hourId, $numGuests, $userId, $title) {
+    public function createReservation() {
         /* insert a new reservation in the database */
+
+        $salleId = $_POST['salleId'];
+        $day = $_POST['day'];
+        $hourId = $_POST['hourId']; 
+        $numGuests = $_POST['numGuests']; 
+        $userId = $_POST['userId']; 
+        $title = $_POST['title'];
+
     	$stmt = $this->connection->prepare("
             INSERT INTO reservation (id, salleId, day, hourId, numGuests, userId, title) 
             VALUES (NULL, :salleId, :day, :hourId, :numGuests, :userId, :title)
@@ -81,8 +89,16 @@ class ReservationService {
     	$stmt->execute();
     }
 
-    public function updateReservation($id, $salleId, $day, $hourId, $numGuests, $userId, $title) {
+    public function updateReservation($id) {
         /* update a reservation */
+
+        $salleId = $_POST['salleId'];
+        $day = $_POST['day'];
+        $hourId = $_POST['hourId']; 
+        $numGuests = $_POST['numGuests']; 
+        $userId = $_POST['userId']; 
+        $title = $_POST['title'];
+
     	$stmt = $this->connection->prepare("
             UPDATE reservation 
             SET salleId=:salleId, day=:day, hourId=:hourId, numGuests=:numGuests, userId=:userId, title=:title

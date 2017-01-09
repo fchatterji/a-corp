@@ -38,8 +38,12 @@ class SalleService {
         return $result;
     }
 
-    public function createSalle($name, $places) {
+    public function createSalle() {
         /* create a salle */
+
+        $name = $_POST['name'];
+        $places = $_POST['places'];
+        
     	$stmt = $this->connection->prepare("INSERT INTO salle (id, name, places) VALUES (NULL, :name, :places)");
 
     	$stmt->bindParam(':name', $name);
@@ -47,8 +51,12 @@ class SalleService {
     	$stmt->execute();
     }
 
-    public function updateSalle($id, $name, $places) {
+    public function updateSalle($id) {
         /* update a salle */
+
+        $name = $_POST['name'];
+        $places = $_POST['places'];
+
     	$stmt = $this->connection->prepare("UPDATE salle SET name=:name, places=:places WHERE id=:id");
 
     	$stmt->bindParam(':id', $id);

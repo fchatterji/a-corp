@@ -1,5 +1,7 @@
 <?php
 
+// TODO simplify reservation list by hour, controler does too much
+
 class ReservationControler {
     /* handle requests that concern reservations */
     var $reservationService;
@@ -46,22 +48,17 @@ class ReservationControler {
             $reservationListByHour[$hour['hour']] = $this->reservationService->getReservationsByDayAndHour($day, $hour['id']);
         }
 
-        // make $day variable available in the view
+        // make $day variables available in the view
         $day = $day;
+        $previousDay = date('Y-m-d', strtotime("-1 day", strtotime($day)));
+        $nextDay = date('Y-m-d', strtotime("+1 day", strtotime($day)));
 
         include("Views/ReservationListView.php");
     }
 
     public function post() {
         /* create a reservation and redirect */
-        $this->reservationService->createReservation(
-            $_POST['salleId'], 
-            $_POST['day'], 
-            $_POST['hourId'], 
-            $_POST['numGuests'], 
-            $_POST['userId'], 
-            $_POST['title']
-            );
+        $this->reservationService->createReservation();
 
         header("Location: https://a-corp1.000webhostapp.com/reservations/".date("Y-m-d"));
         exit();	
@@ -69,15 +66,7 @@ class ReservationControler {
 
     public function put($id) {
         /* update a reservation and redirect */
-        $this->reservationService->updateReservation(
-            $id, 
-            $_POST['salleId'], 
-            $_POST['day'], 
-            $_POST['hourId'], 
-            $_POST['numGuests'], 
-            $_POST['userId'],
-            $_POST['title']
-            );
+        $this->reservationService->updateReservation($id);
 
         header("Location: https://a-corp1.000webhostapp.com/reservations/".date("Y-m-d"));
         exit();	

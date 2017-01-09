@@ -44,7 +44,7 @@ class AuthService {
         return $result;
     }
 
-    public function login($email, $password, $remember) {
+    public function login() {
         /* Authenticates a user with the system.
 
         Parameters:
@@ -61,6 +61,10 @@ class AuthService {
                 hash (string): The session hash to be stored in the session cookie
                 expire (int): Timestamp of session expiry time
         */
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $remember = isset($_POST['remember']) ? true: false;
+        
     	return $this->auth->login($email, $password, $remember);
     }
 
@@ -78,7 +82,7 @@ class AuthService {
     	return $this->auth->logout($hash);
     }
 
-    public function register($email, $password, $repeatpassword) {
+    public function register() {
         /* Handles the registration of a new user.
 
         Parameters:
@@ -93,7 +97,11 @@ class AuthService {
                 error (boolean): Informs whether an error was encountered or not
                 message (string): User-friendly error / success message
         */
-    	return $this->auth->register($email, $password, $repeatpassword);
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $repeatPassword = $_POST['repeatPassword'];
+
+    	return $this->auth->register($email, $password, $repeatPassword);
     }
 
     public function getUserId() {

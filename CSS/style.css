@@ -2,14 +2,53 @@
    Reservation page
    ========================================================================== */
 
+td {
+    padding: 0!important;
+}
+
 td a {
     width: 100%;
     height: 100%;
     display: block;
+    padding: 8px!important;
+}
+
+.datePickerControls {
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+.datePickerControls input {
+    padding-right-right: 10px;
+    padding-left: 10px;
+}
+
+.hours {
+    padding-top: 8px!important;
+    padding-bottom: 8px!important;
+}
+
+.hiddenLink {
+    opacity: 0.0;
+}
+
+td .hours {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 8px!important;
 }
 
 td:hover {
-    opacity: 1.0!important;
+    background-color: #f5f5f5!important;
+}
+
+table {
+    table-layout: fixed;
+}
+
+.hoursHeading {
+    width: 10%;
 }
 
 

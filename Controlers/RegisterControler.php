@@ -15,9 +15,21 @@ class RegisterControler {
 
     public function post() {
         /* register a user and redirect to home page */
-        $array = $this->service->register($_POST['email'], $_POST['password'], $_POST['repeatPassword']);
-        header("Location: https://a-corp1.000webhostapp.com/login");
-        exit();
+        $array = $this->service->register();
+
+        $error = $array["error"];
+        $registerMessage = $array["message"];
+
+        if ($error) {
+            $_SESSION["registerErrorMessage"] = $registerMessage;
+            header("Location: https://a-corp1.000webhostapp.com/login");
+            exit();
+
+        } else {
+            $_SESSION["registerSuccessMessage"] = $registerMessage;
+            header("Location: https://a-corp1.000webhostapp.com/login");
+            exit();            
+        }
     }
 }
 ?>

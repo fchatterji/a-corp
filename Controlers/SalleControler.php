@@ -22,14 +22,14 @@ class SalleControler {
 
     public function post() {
         /* create a salle and redirect */
-        $this->service->createSalle($_POST['name'], $_POST['places']);
+        $this->service->createSalle();
         header("Location: https://a-corp1.000webhostapp.com/salles");
         exit();	
     }
 
     public function put($id) {
         /* update a salle and redirect */
-        $this->service->updateSalle($id, $_POST['name'], $_POST['places']);
+        $this->service->updateSalle($id);
         header("Location: https://a-corp1.000webhostapp.com/salles");
         exit();	
     }
