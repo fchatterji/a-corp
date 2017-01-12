@@ -21,23 +21,56 @@ class ReservationService {
     	return $result;
     }
 
+    public function getReservationsTableData($day) {
+        $possibleHoursService = new PossibleHoursService();
+        $possibleHoursList = $possibleHoursService->getPossibleHours();
+
+        $reservationTableData = array();
+        foreach($possibleHoursList as $hour) {
+            $reservationTableData[$hour['hour']] = $this->getReservationsByDayAndHour($day, $hour['id']);
+        }
+
+        return $reservationTableData;
+    }
+
     public function getReservationsByDayAndHour($day, $hourId) {
         /* get all reservations for a given day and hour */
         $stmt = $this->connection->prepare("
-            SELECT *
-            FROM salle 
+            SELECT possiblehours.id as hourId, possiblehours.hour, reservation.salleId, salle.name, salle.places, 
+            FROM possiblehours
+            JOIN salle 
             LEFT JOIN (
                 SELECT * 
                 FROM reservation 
-                WHERE reservation.day = :day 
-                AND reservation.hourId = :hourId
+                WHERE reservation.day = '2017-01-11' 
+                AND reservation.startHourId = :hourId
                 ) AS filteredReservation 
-            ON salle.id = filteredReservation.salleId 
-            ORDER BY salle.name
+            ON salle.id = filteredReservation.salleId  
+            WHERE possiblehours.id = :hourId
+            ORDER BY possiblehours.hour  ASC, salle.name ASC
             ");
 
         $stmt->bindParam(':day', $day);
         $stmt->bindParam(':hourId', $hourId);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetchall();
+
+        return $result;
+    }
+
+    public function getReservationsByDay($day) {
+
+        $stmt = $this->connection->prepare("
+            SELECT reservation.id, reservation.salleId, reservation.day, reservation.startHourId, reservation.endHourId, reservation.numGuests, reservation.userId, reservation.title, salle.name, salle.places, possiblehours.hour
+            FROM reservation 
+            JOIN salle ON salle.id = reservation.salleId
+            JOIN possiblehours on possiblehours.id = reservation.startHourId
+            WHERE reservation.day = :day
+            ");
+
+        $stmt->bindParam(':day', $day);
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -70,19 +103,21 @@ class ReservationService {
 
         $salleId = $_POST['salleId'];
         $day = $_POST['day'];
-        $hourId = $_POST['hourId']; 
+        $startHourId = $_POST['startHourId']; 
+        $endHourId = $_POST['endHourId'];
         $numGuests = $_POST['numGuests']; 
         $userId = $_POST['userId']; 
         $title = $_POST['title'];
 
     	$stmt = $this->connection->prepare("
-            INSERT INTO reservation (id, salleId, day, hourId, numGuests, userId, title) 
-            VALUES (NULL, :salleId, :day, :hourId, :numGuests, :userId, :title)
+            INSERT INTO reservation (id, salleId, day, startHourId, endHourId, numGuests, userId, title) 
+            VALUES (NULL, :salleId, :day, :startHourId, :endHourId, :numGuests, :userId, :title)
             ");
 
     	$stmt->bindParam(':salleId', $salleId);
     	$stmt->bindParam(':day', $day);
-    	$stmt->bindParam(':hourId', $hourId);
+    	$stmt->bindParam(':startHourId', $startHourId);
+        $stmt->bindParam(':endHourId', $endHourId);
         $stmt->bindParam(':numGuests', $numGuests);
         $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':title', $title);
@@ -94,21 +129,23 @@ class ReservationService {
 
         $salleId = $_POST['salleId'];
         $day = $_POST['day'];
-        $hourId = $_POST['hourId']; 
+        $startHourId = $_POST['startHourId']; 
+        $endHourId = $_POST['endHourId'];
         $numGuests = $_POST['numGuests']; 
         $userId = $_POST['userId']; 
         $title = $_POST['title'];
 
     	$stmt = $this->connection->prepare("
             UPDATE reservation 
-            SET salleId=:salleId, day=:day, hourId=:hourId, numGuests=:numGuests, userId=:userId, title=:title
+            SET salleId=:salleId, day=:day, startHourId=:startHourId, endHourId=:endHourId, numGuests=:numGuests, userId=:userId, title=:title
             WHERE id=:id
             ");
 
     	$stmt->bindParam(':id', $id);
     	$stmt->bindParam(':salleId', $salleId);
     	$stmt->bindParam(':day', $day);
-    	$stmt->bindParam(':hourId', $hourId);
+        $stmt->bindParam(':startHourId', $startHourId);
+        $stmt->bindParam(':endHourId', $endHourId);
         $stmt->bindParam(':numGuests', $numGuests);
         $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':title', $title);

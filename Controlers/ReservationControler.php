@@ -43,10 +43,8 @@ class ReservationControler {
         $userId = $this->authService->getUserId();
 
         // get all reservations for each possible start hour. Store it in the reservationListByHour array
-        $reservationListByHour = array();
-        foreach($possibleHoursList as $hour) {
-            $reservationListByHour[$hour['hour']] = $this->reservationService->getReservationsByDayAndHour($day, $hour['id']);
-        }
+        $tableData = $this->reservationService->getReservationsByDay($day);
+
 
         // make $day variables available in the view
         $day = $day;
@@ -54,13 +52,15 @@ class ReservationControler {
         $nextDay = date('Y-m-d', strtotime("+1 day", strtotime($day)));
 
         include("Views/ReservationListView.php");
+
+
     }
 
     public function post() {
         /* create a reservation and redirect */
         $this->reservationService->createReservation();
 
-        header("Location: https://a-corp1.000webhostapp.com/reservations/".date("Y-m-d"));
+        header("Location: /reservations/".date("Y-m-d"));
         exit();	
     }
 
@@ -68,14 +68,14 @@ class ReservationControler {
         /* update a reservation and redirect */
         $this->reservationService->updateReservation($id);
 
-        header("Location: https://a-corp1.000webhostapp.com/reservations/".date("Y-m-d"));
+        header("Location: /reservations/".date("Y-m-d"));
         exit();	
     }
 
     public function delete($id) {
         /* delete a reservation and redirect */
         $this->reservationService->deleteReservation($id);
-        header("Location: https://a-corp1.000webhostapp.com/reservations/".date("Y-m-d"));
+        header("Location: /reservations/".date("Y-m-d"));
         exit();	
     }
 }

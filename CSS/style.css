@@ -2,15 +2,16 @@
    Reservation page
    ========================================================================== */
 
-td {
-    padding: 0!important;
+td:hover {
+    background-color: #f5f5f5!important;
 }
 
-td a {
-    width: 100%;
-    height: 100%;
-    display: block;
-    padding: 8px!important;
+.hiddenLink {
+    opacity: 0.0;
+}
+
+.hoursHeading {
+    width: 10%;
 }
 
 .datePickerControls {
@@ -23,32 +24,33 @@ td a {
     padding-left: 10px;
 }
 
-.hours {
-    padding-top: 8px!important;
-    padding-bottom: 8px!important;
+.reservationContainer {
+    position: relative;
 }
 
-.hiddenLink {
-    opacity: 0.0;
+.reservation {
+    position: absolute;
+    z-index: 10;
 }
 
-td .hours {
-    width: 100%;
+.reservation a {
     height: 100%;
+    width: 100%;
     display: block;
-    padding: 8px!important;
 }
 
-td:hover {
-    background-color: #f5f5f5!important;
+td a {
+    height: 100%!important;
+    width: 100%!important;
+    display: block!important;
 }
 
 table {
     table-layout: fixed;
 }
 
-.hoursHeading {
-    width: 10%;
+.hiddenLink {
+    opacity: 0.0;
 }
 
 

@@ -20,6 +20,7 @@ class SalleService {
     	$stmt->execute();
 
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        
         $result = $stmt->fetchall();
 
         return $result;
