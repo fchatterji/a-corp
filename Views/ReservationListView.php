@@ -54,6 +54,7 @@
                             data-starthour="<?php echo $hour["hour"]; ?>"
                             data-endhour="<?php echo $hour["hour"]; ?>"
                             data-currentsalleid="<?php echo $salle['id'];?>"
+                            data-currentsalleplaces ="<?php echo $salle['places'];?>"
                             data-day="<?php echo $day;?>"
                             data-userid="<?php echo $userId;?>"
                         >
@@ -91,6 +92,7 @@
                     data-starthourid="<?php echo $reservation['startHourId'];?>"
                     data-endhourid="<?php echo $reservation['endHourId'];?>"
                     data-currentsalleid="<?php echo $reservation['salleId'];?>"
+                    data-currentsalleplaces ="<?php echo $reservation['places'];?>"
                     data-day="<?php echo $day;?>"
                     data-userid="<?php echo $userId;?>"
                     data-numguests="<?php echo $reservation['numGuests'];?>"
@@ -248,7 +250,7 @@ $( ".reservationContainer" ).position({
 
                     <div class="form-group">
                         <label for="numGuests">Nombre de personnes</label>
-                        <input type="number" name="numGuests" id="numGuests" value="10" class="form-control" min="1" required>
+                        <input type="number" name="numGuests" id="numGuests" value="1" class="form-control" min="1" required>
                     </div>
 
                     <div class="form-group">
@@ -372,6 +374,7 @@ $( ".reservationContainer" ).position({
         var startHour = link.data('starthour'); 
         var endHour = link.data('starthour'); 
         var currentSalleId = link.data('currentsalleid');
+        var currentSallePlaces = link.data('currentsalleplaces');
         var day = link.data('day'); 
         var userId = link.data('userid') ;
 
@@ -389,6 +392,9 @@ $( ".reservationContainer" ).position({
         modal.find('#day').val(day);
         modal.find('#userId').val(userId);
 
+        modal.find('#numGuests').val(currentSallePlaces); 
+        modal.find('#numGuests').attr("max", currentSallePlaces);
+
         console.log(startHour);
         console.log(endHour)
         console.log(currentSalleId);
@@ -404,6 +410,7 @@ $( ".reservationContainer" ).position({
         var startHourId = link.data('starthourid'); 
         var endHourId = link.data('endhourid'); 
         var currentSalleId = link.data('currentsalleid');
+        var currentSallePlaces = link.data('currentsalleplaces');
         var day = link.data('day');
         var userId = link.data('userid'); 
         var title = link.data('title');
@@ -419,6 +426,8 @@ $( ".reservationContainer" ).position({
         modal.find('#userId').val(userId);
         modal.find('#title').val(title);
         modal.find('#numGuests').val(numGuests);
+
+        modal.find('#numGuests').attr("max", currentSallePlaces);
 
         modal.find("#updateReservationForm").attr("action", "/reservation/update/" + reservationId);
         modal.find("#deleteReservationForm").attr("action", "/reservation/delete/" + reservationId);
@@ -438,6 +447,10 @@ $( ".reservationContainer" ).position({
 
 </script>
 
+<script>
+
+
+</script>
 
 
 <!-- datepicker script -->
