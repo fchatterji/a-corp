@@ -383,7 +383,7 @@ $( ".reservationContainer" ).position({
 
         modal.find("#endHourId option").filter(function() {
             return this.text == endHour; 
-        }).attr('selected', true);
+        }).next().attr('selected', true);
 
         modal.find('#salleId').val(currentSalleId);
         modal.find('#day').val(day);
