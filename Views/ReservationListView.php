@@ -24,7 +24,7 @@
 <div class="row">
     <div class="col-md-12">
 
-        <table class=" table table-responsive">
+        <table class=" table table-responsive table-bordered">
 
             <thead>
                 <tr class="info">
@@ -42,17 +42,17 @@
                 <tr>
 
                     <td>
-                        <span class="hours"><?php echo date("H:i", strtotime($hour["hour"]));; ?></span>
+                        <span class="hours"><?php echo date("H:i", strtotime($hour["hour"])); ?></span>
                     </td>
 
                     <?php foreach($salleList as $salle): ?>
-                    <td class="<?php echo "td".$salle['id']; ?>">
+                    <td class=" tableContent <?php echo "td".$salle['id']; ?>">
                         <a 
                             href="#" 
                             data-toggle="modal" 
                             data-target="#createReservationModal"
-                            data-starthour="<?php echo $hour["hour"]; ?>"
-                            data-endhour="<?php echo $hour["hour"]; ?>"
+                            data-starthour="<?php echo date("H:i", strtotime($hour["hour"])); ?>"
+                            data-endhour="<?php echo date("H:i", strtotime($hour["hour"])); ?>"
                             data-currentsalleid="<?php echo $salle['id'];?>"
                             data-currentsalleplaces ="<?php echo $salle['places'];?>"
                             data-day="<?php echo $day;?>"
@@ -229,7 +229,7 @@ $( ".reservationContainer" ).position({
                             <!-- jquery (see script below) is used to select a default vaue -->
                             <?php foreach($possibleHoursList as $hour): ?>
                                 <option value="<?php echo $hour['id'] ?>">
-                                    <?php echo $hour['hour'] ?>
+                                    <?php echo date("H:i", strtotime($hour["hour"])); ?>
                                 </option>
                             <?php endforeach ?>
                         </select>
@@ -242,7 +242,7 @@ $( ".reservationContainer" ).position({
                             <!-- jquery (see script below) is used to select a default vaue -->
                             <?php foreach($possibleHoursList as $hour): ?>
                                 <option value="<?php echo $hour['id'] ?>">
-                                    <?php echo $hour['hour'] ?>
+                                    <?php echo date("H:i", strtotime($hour["hour"])); ?>
                                 </option>
                             <?php endforeach ?>
                         </select>
@@ -314,7 +314,7 @@ $( ".reservationContainer" ).position({
                             <!-- jquery (see script below) is used to select a default vaue -->
                             <?php foreach($possibleHoursList as $hour): ?>
                                 <option value="<?php echo $hour['id'] ?>">
-                                    <?php echo $hour['hour'] ?>
+                                    <?php echo date("H:i", strtotime($hour["hour"])); ?>
                                 </option>
                             <?php endforeach ?>
                         </select>
@@ -327,7 +327,7 @@ $( ".reservationContainer" ).position({
                             <!-- jquery (see script below) is used to select a default vaue -->
                             <?php foreach($possibleHoursList as $hour): ?>
                                 <option value="<?php echo $hour['id'] ?>">
-                                    <?php echo $hour['hour'] ?>
+                                    <?php echo date("H:i", strtotime($hour["hour"])); ?>
                                 </option>
                             <?php endforeach ?>
                         </select>
