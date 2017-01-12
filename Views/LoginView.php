@@ -1,5 +1,14 @@
 <?php include "Partials/header.php"; ?>
-<?php include "Partials/loggedOutNav.php"; ?>
+
+<?php 
+if ($isLogged) {
+    include "Partials/loggedInNav.php"; 
+} else {
+    include "Partials/loggedOutNav.php"; 
+}
+
+
+?>
 
 <p>
 <?php

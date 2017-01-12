@@ -11,16 +11,8 @@ class LoginControler {
 
 
     public function get() {
-
-        if ($this->service->isLogged()) {
-            /* redirect to home page */
-            header("Location: /home");
-            exit();             
-        } else {
-            /* display login page */
-            include("Views/LoginView.php");            
-        }
-
+        $isLogged = $this->service->isLogged();
+        include("Views/LoginView.php");            
     }
 
     public function post() {
@@ -34,12 +26,13 @@ class LoginControler {
 
         if ($error) {
             $_SESSION["loginErrorMessage"] = $loginMessage;
+            $isLogged = false;
             header("Location: /login");
             exit();
 
         } else {
             $_SESSION["loginSuccessMessage"] = $loginMessage;
-
+            $isLogged = true;
             // set session cookie
             setcookie('authID', $array["hash"]); 
             // redirect to home page
