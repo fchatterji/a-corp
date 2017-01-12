@@ -10,7 +10,9 @@ class AdminGuardControler {
 
     public function preventAccessIfNotAdmin() {
     	/* if the user is not logged in, redirect him to 403 page */
-    	if (!$this->service->isAdmin()) {
+        $isAdmin = $this->service->isAdmin();
+
+    	if ($isAdmin === 'false') {
     		header('HTTP/1.0 403 Forbidden');
     		include "Views/403NotAdminView.php";
     		exit();

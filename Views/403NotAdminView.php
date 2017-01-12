@@ -1,5 +1,5 @@
 <?php include "Partials/header.php"; ?>
-<?php include "Partials/loggedOutNav.php"; ?>
+<?php include "Partials/loggedInNav.php"; ?>
 
 <p>Vous devez être administrateur pour accéder à cette page.</p>
 

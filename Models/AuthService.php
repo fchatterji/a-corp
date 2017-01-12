@@ -35,13 +35,13 @@ class AuthService {
     public function isAdmin() {
         $userId = $this->getUserId();
         $stmt = $this->connection->prepare("SELECT isadmin FROM users WHERE id=:id");
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':id', $userId);
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 
         $result = $stmt->fetch();
 
-        return $result;
+        return $result["isadmin"];
     }
 
     public function login() {
