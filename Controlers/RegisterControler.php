@@ -22,12 +22,12 @@ class RegisterControler {
 
         if ($error) {
             $_SESSION["registerErrorMessage"] = $registerMessage;
-            header("Location: https://a-corp1.000webhostapp.com/login");
+            header("Location: /login");
             exit();
 
         } else {
             $_SESSION["registerSuccessMessage"] = $registerMessage;
-            header("Location: https://a-corp1.000webhostapp.com/login");
+            header("Location: /login");
             exit();            
         }
     }

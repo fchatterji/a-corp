@@ -11,7 +11,7 @@ class LogoutControler {
     public function get() {
         /* logout and redirect to login page */
         $boolean = $this->service->logout($_COOKIE["authID"]);
-        header("Location: https://a-corp1.000webhostapp.com/login");
+        header("Location: /login");
         exit();
     }
 }

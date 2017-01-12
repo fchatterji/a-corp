@@ -16,7 +16,7 @@ $router->get('/', function() {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    header("Location: https://a-corp1.000webhostapp.com/home");
+    header("Location: /home");
 });
 
 

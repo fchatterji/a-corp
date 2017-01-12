@@ -14,7 +14,7 @@ class LoginControler {
 
         if ($this->service->isLogged()) {
             /* redirect to home page */
-            header("Location: https://a-corp1.000webhostapp.com/home");
+            header("Location: /home");
             exit();             
         } else {
             /* display login page */
@@ -34,7 +34,7 @@ class LoginControler {
 
         if ($error) {
             $_SESSION["loginErrorMessage"] = $loginMessage;
-            header("Location: https://a-corp1.000webhostapp.com/login");
+            header("Location: /login");
             exit();
 
         } else {
@@ -43,7 +43,7 @@ class LoginControler {
             // set session cookie
             setcookie('authID', $array["hash"]); 
             // redirect to home page
-            header("Location: https://a-corp1.000webhostapp.com/home");
+            header("Location: /home");
             exit();            
         }
     }
