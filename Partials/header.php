@@ -10,6 +10,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+    <!-- JqueryUI CSS -->
+    <link href="/jquery-ui-1.12.1.custom/jquery-ui.min.css" rel="stylesheet">
+
     <!-- Datepicker CSS -->
     <link href="/datepicker/datepicker.min.css" rel="stylesheet">
 
@@ -18,6 +21,9 @@
 
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- JqueryUI -->
+    <script src="/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 
     <!-- Datepicker JS -->
     <script src="/datepicker/datepicker.min.js"></script>
