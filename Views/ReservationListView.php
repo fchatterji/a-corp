@@ -351,6 +351,7 @@ $( ".reservationContainer" ).position({
 
                 <form method="post" id="deleteReservationForm">
 
+                    <input type="hidden" name="day" id="day" class="form-control">
                     <input type="hidden" name="userId" id="userId">
 
                     <button type="submit" class="btn btn-default">Supprimer la réservation</button>

@@ -60,7 +60,8 @@ class ReservationControler {
         /* create a reservation and redirect */
         $this->reservationService->createReservation();
 
-        header("Location: /reservations/".date("Y-m-d"));
+        $day = $_POST['day'];
+        header("Location: /reservations/".$day);
         exit();	
     }
 
@@ -68,14 +69,17 @@ class ReservationControler {
         /* update a reservation and redirect */
         $this->reservationService->updateReservation($id);
 
-        header("Location: /reservations/".date("Y-m-d"));
+        $day = $_POST['day'];
+        header("Location: /reservations/".$day);
         exit();	
     }
 
     public function delete($id) {
         /* delete a reservation and redirect */
         $this->reservationService->deleteReservation($id);
-        header("Location: /reservations/".date("Y-m-d"));
+
+        $day = $_POST['day'];
+        header("Location: /reservations/".$day);
         exit();	
     }
 }
