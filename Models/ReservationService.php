@@ -10,56 +10,6 @@ class ReservationService {
         $this->connection = Connexion::init();
     }
 
-    public function getReservationList() {
-        /* get all reservations */
-    	$stmt = $this->connection->prepare("SELECT * FROM reservation");
-    	$stmt->execute();
-
-    	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
-        $result = $stmt->fetchall();
-
-    	return $result;
-    }
-
-    public function getReservationsTableData($day) {
-        $possibleHoursService = new PossibleHoursService();
-        $possibleHoursList = $possibleHoursService->getPossibleHours();
-
-        $reservationTableData = array();
-        foreach($possibleHoursList as $hour) {
-            $reservationTableData[$hour['hour']] = $this->getReservationsByDayAndHour($day, $hour['id']);
-        }
-
-        return $reservationTableData;
-    }
-
-    public function getReservationsByDayAndHour($day, $hourId) {
-        /* get all reservations for a given day and hour */
-        $stmt = $this->connection->prepare("
-            SELECT possiblehours.id as hourId, possiblehours.hour, reservation.salleId, salle.name, salle.places, 
-            FROM possiblehours
-            JOIN salle 
-            LEFT JOIN (
-                SELECT * 
-                FROM reservation 
-                WHERE reservation.day = '2017-01-11' 
-                AND reservation.startHourId = :hourId
-                ) AS filteredReservation 
-            ON salle.id = filteredReservation.salleId  
-            WHERE possiblehours.id = :hourId
-            ORDER BY possiblehours.hour  ASC, salle.name ASC
-            ");
-
-        $stmt->bindParam(':day', $day);
-        $stmt->bindParam(':hourId', $hourId);
-        $stmt->execute();
-
-        $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-        $result = $stmt->fetchall();
-
-        return $result;
-    }
-
     public function getReservationsByDay($day) {
 
         $stmt = $this->connection->prepare("

@@ -24,133 +24,126 @@
 <div class="row">
     <div class="col-md-12">
 
-            <table class=" table table-bordered">
+        <table class=" table table-responsive">
 
-                <!-- Table head -->
-                <thead>
-                    <tr class="info">
-                        <th class="hoursHeading firstCellOfReservationTable">heure</th>
-                        <?php foreach($salleList as $salle):?>
-                            <th class="text-center">
-                                <?php echo $salle['name']?>
-                            </th>
-                        <?php endforeach; ?>
-                    </tr>
-                </thead>
-
-                <!-- Table body -->
-                <tbody>
-                    <?php foreach($possibleHoursList as $key => $hour): ?>
-                    <tr>
-
-                        <td>
-                            <span class="hours"><?php echo date("H:i", strtotime($hour["hour"]));; ?></span>
-                        </td>
-
-                        <?php foreach($salleList as $salle): ?>
-                        <td class="<?php echo "td".$salle['id']; ?>">
-                            <a 
-                                href="#" 
-                                data-toggle="modal" 
-                                data-target="#createReservationModal"
-                                data-starthour="<?php echo $hour["hour"]; ?>"
-                                data-endhour="<?php echo $hour["hour"]; ?>"
-                                data-currentsalleid="<?php echo $salle['id'];?>"
-                                data-day="<?php echo $day;?>"
-                                data-userid="<?php echo $userId;?>"
-                            >
-                                <span class="hiddenLink">link</span>
-                            </a>          
-                        </td>
-
-                        <?php endforeach; ?>
-                    </tr>
+            <thead>
+                <tr class="info">
+                    <th class="hoursHeading firstCellOfReservationTable">heure</th>
+                    <?php foreach($salleList as $salle):?>
+                        <th class="text-center">
+                            <?php echo $salle['name']?>
+                        </th>
                     <?php endforeach; ?>
-                </tbody>
-            </table>
+                </tr>
+            </thead>
 
-            <!-- reservation layer -->
-            <div class="reservationContainer">
-            <?php foreach($tableData as $key => $reservation): ?>
+            <tbody>
+                <?php foreach($possibleHoursList as $key => $hour): ?>
+                <tr>
 
-                <!-- calculate the coordinates to position the reservation -->
-                <?php
-                $reservation ["xCoordinate"] = array_search($reservation["name"], array_column($salleList, "name"));
-                $reservation ["yCoordinate"] = $reservation["startHourId"] - 1;
-                $reservation ["verticalSize"] = $reservation["endHourId"] - $reservation["startHourId"];
-                ?>
+                    <td>
+                        <span class="hours"><?php echo date("H:i", strtotime($hour["hour"]));; ?></span>
+                    </td>
 
-                <!-- if the reservation was created by the current user, link to modify Reservation modal -->
-                <?php if ($reservation['userId'] === $userId): ?>
-                    <div class="reservation text-center well" id="<?php echo $reservation['id']; ?>">
-                    
+                    <?php foreach($salleList as $salle): ?>
+                    <td class="<?php echo "td".$salle['id']; ?>">
                         <a 
-                        href="#" 
-                        data-toggle="modal" 
-                        data-target="#updateReservationModal"
-                        data-starthourid="<?php echo $reservation['startHourId'];?>"
-                        data-endhourid="<?php echo $reservation['endHourId'];?>"
-                        data-currentsalleid="<?php echo $reservation['salleId'];?>"
-                        data-day="<?php echo $day;?>"
-                        data-userid="<?php echo $userId;?>"
-                        data-numguests="<?php echo $reservation['numGuests'];?>"
-                        data-reservationid="<?php echo $reservation['id'];?>"
-                        data-title="<?php echo $reservation['title'];?>"
+                            href="#" 
+                            data-toggle="modal" 
+                            data-target="#createReservationModal"
+                            data-starthour="<?php echo $hour["hour"]; ?>"
+                            data-endhour="<?php echo $hour["hour"]; ?>"
+                            data-currentsalleid="<?php echo $salle['id'];?>"
+                            data-day="<?php echo $day;?>"
+                            data-userid="<?php echo $userId;?>"
                         >
-                            <?php echo $reservation['title'] ?>
-                        </a>
-                    
-                    </div>
+                            <span class="hiddenLink">link</span>
+                        </a>          
+                    </td>
+
+                    <?php endforeach; ?>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
 
 
-                <!-- if the reservation exists wasn't created by the current user, modal to alert the user -->
-                <?php elseif ($reservation['userId'] !== $userId): ?>
+
+        <!-- reservation layer -->
+        <div class="reservationContainer">
+        <?php foreach($tableData as $key => $reservation): ?>
+
+            <!-- calculate the coordinates to position the reservation -->
+            <?php
+            $reservation ["xCoordinate"] = array_search($reservation["name"], array_column($salleList, "name"));
+            $reservation ["yCoordinate"] = $reservation["startHourId"] - 1;
+            $reservation ["verticalSize"] = $reservation["endHourId"] - $reservation["startHourId"];
+            ?>
+
+            <!-- if the reservation was created by the current user, link to modify Reservation modal -->
+            <?php if ($reservation['userId'] === $userId): ?>
                 <div class="reservation text-center well" id="<?php echo $reservation['id']; ?>">
                 
                     <a 
-                        href="#" 
-                        data-toggle="modal" 
-                        data-target="#alertNotCorrectUserModal"
+                    href="#" 
+                    data-toggle="modal" 
+                    data-target="#updateReservationModal"
+                    data-starthourid="<?php echo $reservation['startHourId'];?>"
+                    data-endhourid="<?php echo $reservation['endHourId'];?>"
+                    data-currentsalleid="<?php echo $reservation['salleId'];?>"
+                    data-day="<?php echo $day;?>"
+                    data-userid="<?php echo $userId;?>"
+                    data-numguests="<?php echo $reservation['numGuests'];?>"
+                    data-reservationid="<?php echo $reservation['id'];?>"
+                    data-title="<?php echo $reservation['title'];?>"
                     >
                         <?php echo $reservation['title'] ?>
                     </a>
-                </div>
                 
-                <?php endif; ?>
+                </div>
 
 
-                <script type="text/javascript">
-                    var reservation = (<?php echo json_encode($reservation); ?>);
-                    console.log(reservation);
-
-                    var tdClass = ".td" + reservation['salleId'];
-
-                    var tdHeight = $(tdClass).outerHeight();
-                    var tdWidth = $(tdClass).outerWidth();
-
-
-                    var reservationId = "#" + reservation["id"];
-
-                    $(reservationId).css({
-                        "top": tdHeight * reservation["yCoordinate"],
-                        "left": tdWidth * reservation["xCoordinate"],
-                        "height": tdHeight * reservation["verticalSize"],
-                        "width": tdWidth,
-                    })
-
-                    console.log(reservationId);
-                    console.log(tdHeight);
-                    console.log(tdWidth)
-                    console.log(tdHeight * reservation["yCoordinate"]);
-                    console.log(tdWidth * reservation["xCoordinate"]);
-                    console.log(tdHeight * reservation["verticalSize"]);
-
-
-                </script>
-
-            <?php endforeach; ?>
+            <!-- if the reservation exists wasn't created by the current user, modal to alert the user -->
+            <?php elseif ($reservation['userId'] !== $userId): ?>
+            <div class="reservation text-center well" id="<?php echo $reservation['id']; ?>">
+            
+                <a 
+                    href="#" 
+                    data-toggle="modal" 
+                    data-target="#alertNotCorrectUserModal"
+                >
+                    <?php echo $reservation['title'] ?>
+                </a>
             </div>
+            
+            <?php endif; ?>
+
+
+            <script type="text/javascript">
+                var reservation = (<?php echo json_encode($reservation); ?>);
+                console.log(reservation);
+
+                var tdClass = ".td" + reservation['salleId'];
+
+                var tdHeight = $(tdClass).outerHeight();
+                var tdWidth = $(tdClass).outerWidth();
+                var borderHeight = $(tdClass);
+
+
+                var reservationId = "#" + reservation["id"];
+
+                $(reservationId).css({
+                    "top": tdHeight * reservation["yCoordinate"],
+                    "left": tdWidth * reservation["xCoordinate"],
+                    "height": tdHeight * reservation["verticalSize"],
+                    "width": tdWidth,
+                })
+
+            </script>
+
+        <?php endforeach; ?>
         </div>
+    </div>
 </div>
 
 
@@ -165,17 +158,6 @@ $( ".reservationContainer" ).position({
 });
 
 </script>
-
-
-
-<?php echo "<pre>" ?>
-<?php print_r($tableData) ?>
-<?php echo "</pre>" ?>
-
-<?php echo "<pre>" ?>
-<?php print_r($salleList) ?>
-<?php echo "</pre>" ?>
-
 
 
 

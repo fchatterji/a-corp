@@ -10,10 +10,6 @@ td:hover {
     opacity: 0.0;
 }
 
-.hoursHeading {
-    width: 10%;
-}
-
 .datePickerControls {
     margin-bottom: 40px;
     margin-top: 20px;
