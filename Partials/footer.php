@@ -16,7 +16,10 @@
 
             } else if (url.includes("home")) {
                 $('.nav-home').addClass('active');
-
+            } else if (url.includes("home")) {
+                $('.nav-home').addClass('active');
+            } else if (url.includes("login")) {
+                $('.nav-login').addClass('active');
             }
         });
 

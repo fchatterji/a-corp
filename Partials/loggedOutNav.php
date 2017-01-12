@@ -20,7 +20,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login">Se connecter/S'inscrire</a></li>
+                <li class="nav-login"><a href="/login">Se connecter / S'inscrire</a></li>
             </ul>
         </div>
     </div>

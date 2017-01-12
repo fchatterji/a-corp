@@ -32,7 +32,7 @@
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a href="/logout">Se déconnecter</a></li>
+                    <li class="nav-logout"><a href="/logout">Se déconnecter</a></li>
                   </ul>
                 </li>
             </ul>
