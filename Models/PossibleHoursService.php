@@ -14,8 +14,12 @@ class PossibleHoursService {
     }
 
     public function getPossibleHours() {
-        /* get all possible hours */
-        $stmt = $this->connection->prepare("SELECT * FROM possiblehours");
+        /* get all possible hours, without the seconds */
+        $stmt = $this->connection->prepare("
+            SELECT possiblehours.id, 
+            DATE_FORMAT(possiblehours.hour, '%H:%i') AS hour 
+            FROM possiblehours
+        ");
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 

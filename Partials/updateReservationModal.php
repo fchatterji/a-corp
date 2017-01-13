@@ -64,7 +64,7 @@
                             <!-- jquery (see script below) is used to select a default vaue -->
                             <?php foreach($possibleHoursList as $hour): ?>
                                 <option value="<?php echo $hour['id'] ?>">
-                                    <?php echo date("H:i", strtotime($hour["hour"])); ?>
+                                    <?php echo $hour["hour"]; ?>
                                 </option>
                             <?php endforeach ?>
                         </select>
@@ -77,7 +77,7 @@
                             <!-- jquery (see script below) is used to select a default vaue -->
                             <?php foreach($possibleHoursList as $hour): ?>
                                 <option value="<?php echo $hour['id'] ?>">
-                                    <?php echo date("H:i", strtotime($hour["hour"])); ?>
+                                    <?php echo $hour["hour"]; ?>
                                 </option>
                             <?php endforeach ?>
                         </select>

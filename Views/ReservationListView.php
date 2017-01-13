@@ -42,7 +42,7 @@
                 <tr>
 
                     <td>
-                        <span class="hours"><?php echo date("H:i", strtotime($hour["hour"])); ?></span>
+                        <span class="hours"><?php echo $hour["hour"]; ?></span>
                     </td>
 
                     <?php foreach($salleList as $salle): ?>
@@ -51,8 +51,8 @@
                             href="#" 
                             data-toggle="modal" 
                             data-target="#createReservationModal"
-                            data-starthour="<?php echo date("H:i", strtotime($hour["hour"])); ?>"
-                            data-endhour="<?php echo date("H:i", strtotime($hour["hour"])); ?>"
+                            data-starthour="<?php echo $hour["hour"]; ?>"
+                            data-endhour="<?php echo $hour["hour"]; ?>"
                             data-currentsalleid="<?php echo $salle['id'];?>"
                             data-currentsalleplaces ="<?php echo $salle['places'];?>"
                             data-day="<?php echo $day;?>"
