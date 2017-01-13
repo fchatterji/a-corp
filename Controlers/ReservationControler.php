@@ -44,7 +44,11 @@ class ReservationControler {
 
     public function post() {
         /* create a reservation and redirect */
-        $this->reservationService->createReservation();
+        $array = $this->reservationService->createReservation();
+
+        if ($array["error"]) {
+            $_SESSION["reservationErrorMessage"] = $array["message"];
+        }
 
         $day = $_POST['day'];
         header("Location: /reservations/".$day);
@@ -53,7 +57,11 @@ class ReservationControler {
 
     public function put($id) {
         /* update a reservation and redirect */
-        $this->reservationService->updateReservation($id);
+        $array = $this->reservationService->updateReservation($id);
+
+        if ($array["error"]) {
+            $_SESSION["reservationErrorMessage"] = $array["message"];
+        }
 
         $day = $_POST['day'];
         header("Location: /reservations/".$day);

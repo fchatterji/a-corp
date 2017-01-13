@@ -1,7 +1,15 @@
 <?php include "Partials/header.php"; ?>
 <?php include "Partials/loggedInNav.php"; ?>
     
+<p>
+<?php
+if (isset($_SESSION['reservationErrorMessage'])) {
 
+    echo $_SESSION['reservationErrorMessage'];
+    unset($_SESSION['reservationErrorMessage']);
+}
+?>
+</p>
 
 <div class="row"> 
 
@@ -196,8 +204,6 @@ $( ".reservationContainer" ).position({
     });
 
 </script>
-
-
 
 <?php include "Partials/footer.php"; ?>
 

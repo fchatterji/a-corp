@@ -48,6 +48,36 @@ class ReservationService {
         return $result;	
     }
 
+    public function isAlreadyBooked($salleId, $day, $startHourId, $endHourId) {
+
+        $stmt = $this->connection->prepare("
+            SELECT *
+            FROM reservation
+            JOIN possiblehours ON reservation.startHourId = possiblehours.id
+            WHERE (:startHourId >= startHourId AND :startHourId < endHourId)
+            OR (:endHourId > startHourId AND :endHourId <= endHourId)
+            AND reservation.day = :day 
+            AND reservation.salleId = :salleId 
+            ");
+
+        $stmt->bindParam(':salleId', $salleId);
+        $stmt->bindParam(':day', $day);
+        $stmt->bindParam(':startHourId', $startHourId);
+        $stmt->bindParam(':endHourId', $endHourId);
+        $stmt->execute();    
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetchall();
+
+        if (count($result) > 0) {
+            $isBooked = true;
+        } else {
+            $isBooked = false;
+        }
+        
+        return $isBooked;
+    }
+
     public function createReservation() {
         /* insert a new reservation in the database */
 
@@ -58,6 +88,14 @@ class ReservationService {
         $numGuests = $_POST['numGuests']; 
         $userId = $_POST['userId']; 
         $title = $_POST['title'];
+
+        if ($this->isAlreadyBooked($salleId, $day,$startHourId, $endHourId)) {
+            return array("error" => true, "message" => "Ce créneau est déjà réservé.");
+        }
+
+        if ($startHourId >= $endHourId) {
+            return array("error" => true, "message" => "La date de début intervient après la date de fin.");
+        }
 
     	$stmt = $this->connection->prepare("
             INSERT INTO reservation (id, salleId, day, startHourId, endHourId, numGuests, userId, title) 
@@ -72,6 +110,8 @@ class ReservationService {
         $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':title', $title);
     	$stmt->execute();
+
+        return array("error" => false, "message" => "La réservation a bien été créée.");
     }
 
     public function updateReservation($id) {
@@ -84,6 +124,15 @@ class ReservationService {
         $numGuests = $_POST['numGuests']; 
         $userId = $_POST['userId']; 
         $title = $_POST['title'];
+
+        if ($this->isAlreadyBooked($salleId, $day,$startHourId, $endHourId)) {
+            return array("error" => true, "message" => "Ce créneau est déjà réservé.");
+        }
+
+        if ($startHourId >= $endHourId) {
+            return array("error" => true, "message" => "La date de début intervient après la date de fin.");
+        }
+
 
     	$stmt = $this->connection->prepare("
             UPDATE reservation 
@@ -100,6 +149,8 @@ class ReservationService {
         $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':title', $title);
     	$stmt->execute(); 	
+
+        return array("error" => false, "message" => "La réservation a bien mise à jour.");
     }
 
     public function deleteReservation($id) {
