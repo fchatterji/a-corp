@@ -98,8 +98,15 @@ $router->get('/reservations/([a-z0-9_-]+)', function($day) {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    $controler = new ReservationControler();
-    $controler->getReservationList($day);
+    include 'Tools/validateDate.php';
+    if (!isValidDay($day)) {       
+        header('HTTP/1.1 404 Not Found');
+        include "Views/404ErrorView.php";
+    } else {
+        $controler = new ReservationControler();
+        $controler->getReservationList($day);        
+    }
+
 });
 
 

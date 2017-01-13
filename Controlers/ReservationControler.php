@@ -16,20 +16,6 @@ class ReservationControler {
         $this->authService = new AuthService();
     }
 
-    public function getReservation($id) {
-        /* display the single reservation view */
-
-        // get possible hours from possible hours service
-        $possibleHoursList = $this->possibleHoursService->getPossibleHours();
-
-        // get list of salles from salle service
-        $salleList = $this->salleService->getSalleList();
-
-        // get reservation from reservation service
-        $reservation = $this->reservationService->getReservationById($id);
-        include("Views/ReservationDetailView.php");
-    }
-
     public function getReservationList($day) {
         /* displays a table of reservations, filtered by day */
 
