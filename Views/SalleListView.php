@@ -14,13 +14,13 @@
                     </p>
 
                     <p>
-                        <!-- Button trigger update modal -->
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#updateSalleModal<?php echo $salle['id']?>">
-                            Modifier
-                        </button>
                         <!-- Button trigger delete modal -->
                         <button class="btn btn-default" data-toggle="modal" data-target="#deleteSalleModal<?php echo $salle['id']?>">
                             Supprimer
+                        </button>
+                        <!-- Button trigger update modal -->
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#updateSalleModal<?php echo $salle['id']?>">
+                            Modifier
                         </button>
                     </p>
                 </div>
@@ -48,11 +48,20 @@
                     <div class="modal-body">
 
                         <form action="<?php echo "/salle/update/".htmlspecialchars($salle['id']) ?>" method="post">
-                            <label for="name">Name:</label>
-                            <input type="text" required name="name" id="name" value="<?php echo htmlspecialchars($salle['name']); ?>">
-                            <label for="places">Places:</label>
-                            <input type="number" required name="places" id="places" value="<?php echo htmlspecialchars($salle['places']); ?>">
-                            <input type="submit" value="update">
+
+                            <div class="form-group">
+                                <label for="name">Nom</label>
+                                <input type="text" required name="name" id="name" class="form-control" value="<?php echo htmlspecialchars($salle['name']); ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="places">Nombre de places</label>
+                                <input type="number" required name="places" id="places" class="form-control" value="<?php echo htmlspecialchars($salle['places']); ?>">
+                            </div>
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+
+                            <button type="submit" class="btn btn-primary pull-right">Modifier la salle</button>
                         </form>
 
                     </div>
@@ -82,8 +91,10 @@
                     <div class="modal-body">
 
                         <form action="/salle/delete/<?php echo $salle['id'] ?>" method="post">
-                            <button type="submit" class="btn btn-primary">Confirmer</button>
+                            <button type="submit" class="btn btn-primary pull-right">Confirmer</button>
                         </form>
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 
                     </div>
                 </div>
