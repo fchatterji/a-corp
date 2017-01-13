@@ -8,12 +8,6 @@ class SalleControler {
         $this->service = new SalleService();
     }
 
-    public function getSalle($id) {
-        /* display a single salle */
-        $salle = $this->service->getSalleById($id);
-        include("Views/SalleDetailView.php");
-    }
-
     public function getSalleList() {
         /* display a list of salles */
         $salleList = $this->service->getSalleList();

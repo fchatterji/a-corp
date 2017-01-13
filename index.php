@@ -66,15 +66,6 @@ $router->get('/salles', function() {
     $controler->getSalleList();
 });
 
-$router->get('/salle/(\d+)', function($id) { 
-
-    $loginGuardControler = new LoginGuardControler();
-    $loginGuardControler->preventAccessIfNotLoggedIn();
-
-    $controler = new SalleControler();
-    $controler->getSalle($id);
-});
-
 $router->post('/salle/create', function() { 
 
     $loginGuardControler = new LoginGuardControler();
@@ -111,14 +102,6 @@ $router->get('/reservations/([a-z0-9_-]+)', function($day) {
     $controler->getReservationList($day);
 });
 
-$router->get('/reservation/(\d+)', function($id) { 
-
-    $loginGuardControler = new LoginGuardControler();
-    $loginGuardControler->preventAccessIfNotLoggedIn();
-
-    $controler = new ReservationControler();
-    $controler->get($id);
-});
 
 $router->post('/reservation/create', function() { 
 
@@ -145,6 +128,11 @@ $router->post('/reservation/delete/(\d+)', function($id) {
 
     $controler = new ReservationControler();
     $controler->delete($id);
+});
+
+$router->set404(function() {
+    header('HTTP/1.1 404 Not Found');
+    include "Views/404ErrorView.php";
 });
 
 // Run it!
