@@ -21,14 +21,12 @@
 
                     <div class="form-group">
                         <label for="title">Titre</label>
-                        <input type="text" name="title" id="title" value="Exemple de titre" class="form-control" required>
+                        <input type="text" name="title" id="title" placeholder="Titre" class="form-control" required>
                     </div>
 
                     <div class="form-group">
                         <label for="salleId">Salle</label>
                         <select name="salleId" id="salleId" class="form-control">
-                            <!-- php is used to display the list of all possible values -->
-                            <!-- jquery (see script below) is used to select a default vaue -->
                             <?php foreach($salleList as $salle): ?>
                                 <option value="<?php echo $salle['id'] ?>" >
                                     <?php echo $salle['name'] ?>
@@ -39,9 +37,7 @@
 
                     <div class="form-group">
                         <label for="startHour">Début</label>
-                        <select name="startHourId" id="startHourId" class="form-control">
-                            <!-- php is used to display the list of all possible values -->
-                            <!-- jquery (see script below) is used to select a default vaue -->
+                        <select name="startHourId" id="startHourId" class="form-control startHourSelect">
                             <?php foreach($possibleHoursList as $hour): ?>
                                 <option value="<?php echo $hour['id'] ?>">
                                     <?php echo $hour["hour"]; ?>
@@ -52,9 +48,7 @@
 
                     <div class="form-group">
                         <label for="endHourId">Fin</label>
-                        <select name="endHourId" id="endHourId" class="form-control">
-                            <!-- php is used to display the list of all possible values -->
-                            <!-- jquery (see script below) is used to select a default vaue -->
+                        <select name="endHourId" id="endHourId" class="form-control endHourSelect">
                             <?php foreach($possibleHoursList as $hour): ?>
                                 <option value="<?php echo $hour['id'] ?>">
                                     <?php echo $hour["hour"]; ?>
@@ -65,7 +59,7 @@
 
                     <div class="form-group">
                         <label for="numGuests">Nombre de personnes</label>
-                        <input type="number" name="numGuests" id="numGuests" value="1" class="form-control" min="1" required>
+                        <input type="number" name="numGuests" id="numGuests" class="form-control" min="1" required>
                     </div>
 
                     <div class="form-group">
@@ -116,12 +110,6 @@
 
         modal.find('#numGuests').val(currentSallePlaces); 
         modal.find('#numGuests').attr("max", currentSallePlaces);
-
-        console.log(startHour);
-        console.log(endHour)
-        console.log(currentSalleId);
-        console.log(day);
-        console.log(userId);
     })
 
 </script>

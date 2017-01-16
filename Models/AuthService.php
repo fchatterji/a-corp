@@ -34,6 +34,10 @@ class AuthService {
 
     public function isAdmin() {
         $userId = $this->getUserId();
+        if ($userId == -1) {
+            //return "false";
+            return "true";
+        }
         $stmt = $this->connection->prepare("SELECT isadmin FROM users WHERE id=:id");
         $stmt->bindParam(':id', $userId);
         $stmt->execute();
@@ -115,8 +119,14 @@ class AuthService {
 
             $uid (int): User's ID
         */
-        $hash = $_COOKIE[$this->config->cookie_name];
-        return $this->auth->getSessionUID($hash);
+        if (isset($_COOKIE[$this->config->cookie_name])) {
+            $hash = $_COOKIE[$this->config->cookie_name];
+            return $this->auth->getSessionUID($hash);
+        } else {
+            return -1;
+        }
+        
+        
     }
 }
 

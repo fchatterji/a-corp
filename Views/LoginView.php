@@ -10,35 +10,29 @@ if ($isLogged) {
 
 ?>
 
-<p>
-<?php
-if (isset($_SESSION['loginErrorMessage'])) {
 
-    echo $_SESSION['loginErrorMessage'];
-    unset($_SESSION['loginErrorMessage']);
-}
-?>
-</p>
+<?php if (isset($_SESSION['loginErrorMessage'])): ?>
+    <p class="alert alert-danger">
+    <?php echo $_SESSION['loginErrorMessage']; ?>
+    <?php unset($_SESSION['loginErrorMessage']); ?>
+    </p>
+<?php endif ?>
 
-<p>
-<?php
-if (isset($_SESSION['registerErrorMessage'])) {
+<?php if (isset($_SESSION['registerErrorMessage'])): ?>
+    <p class="alert alert-danger">
+    <?php echo $_SESSION['registerErrorMessage']; ?>
+    <?php unset($_SESSION['registerErrorMessage']); ?>
+    </p>
+<?php endif ?>
 
-    echo $_SESSION['registerErrorMessage'];
-    unset($_SESSION['registerErrorMessage']);
-}
-?>
-</p>
+<?php if (isset($_SESSION['registerSuccessMessage'])): ?>
+    <p class="alert alert-success">
+    <?php echo $_SESSION['registerSuccessMessage']; ?>
+    <?php unset($_SESSION['registerSuccessMessage']); ?>
+    </p>
+<?php endif ?>
 
-<p>
-<?php
-if (isset($_SESSION['registerSuccessMessage'])) {
 
-    echo $_SESSION['registerSuccessMessage'];
-    unset($_SESSION['registerSuccessMessage']);
-}
-?>
-</p>
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -79,15 +73,6 @@ if (isset($_SESSION['registerSuccessMessage'])) {
                                 <div class="row">
                                     <div class="col-sm-6 col-sm-offset-3">
                                         <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Se connecter">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="text-center">
-                                            <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Mot de passe oublié?</a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

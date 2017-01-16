@@ -1,15 +1,22 @@
 <?php include "Partials/header.php"; ?>
 <?php include "Partials/loggedInNav.php"; ?>
-    
-<p>
-<?php
-if (isset($_SESSION['reservationErrorMessage'])) {
 
-    echo $_SESSION['reservationErrorMessage'];
-    unset($_SESSION['reservationErrorMessage']);
-}
-?>
-</p>
+
+<?php if (isset($_SESSION['reservationErrorMessage'])): ?>
+    <p class="alert alert-danger">
+    <?php echo $_SESSION['reservationErrorMessage']; ?>
+    <?php unset($_SESSION['reservationErrorMessage']); ?>
+    </p>
+<?php endif ?>
+
+
+<?php if (isset($_SESSION['loginSuccessMessage'])): ?>
+    <p class="alert alert-success">
+    <?php echo $_SESSION['loginSuccessMessage']; ?>
+    <?php unset($_SESSION['loginSuccessMessage']); ?>
+    </p>
+<?php endif ?>
+
 
 <div class="row"> 
 
@@ -91,7 +98,7 @@ if (isset($_SESSION['reservationErrorMessage'])) {
 
             <!-- if the reservation was created by the current user, link to modify Reservation modal -->
             <?php if ($reservation['userId'] === $userId): ?>
-                <div class="reservation text-center well" id="<?php echo $reservation['id']; ?>">
+                <div class="reservation text-center well well-success" id="<?php echo $reservation['id']; ?>">
                 
                     <a 
                     href="#" 
@@ -113,9 +120,9 @@ if (isset($_SESSION['reservationErrorMessage'])) {
                 </div>
 
 
-            <!-- if the reservation exists wasn't created by the current user, modal to alert the user -->
+            <!-- if the reservation exists but wasn't created by the current user, modal to alert the user -->
             <?php elseif ($reservation['userId'] !== $userId): ?>
-            <div class="reservation text-center well" id="<?php echo $reservation['id']; ?>">
+            <div class="reservation text-center well well-warning" id="<?php echo $reservation['id']; ?>">
             
                 <a 
                     href="#" 

@@ -11,12 +11,13 @@ class LoginControler {
 
 
     public function get() {
+
         $isLogged = $this->service->isLogged();
         include("Views/LoginView.php");            
     }
 
     public function post() {
-        /* login then redirect to home page */
+        /* login then redirect to reservations page */
         $array = $this->service->login();
 
         $error = $array["error"];
@@ -34,9 +35,10 @@ class LoginControler {
             $_SESSION["loginSuccessMessage"] = $loginMessage;
             $isLogged = true;
             // set session cookie
-            setcookie('authID', $array["hash"]); 
-            // redirect to home page
-            header("Location: /home");
+            setcookie('authID', $array["hash"], $expire); 
+            // redirect to reservations page
+            $day =  $date = date('Y-m-d');
+            header("Location: /reservations/".$day);
             exit();            
         }
     }

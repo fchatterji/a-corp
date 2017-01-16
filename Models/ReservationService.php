@@ -54,8 +54,10 @@ class ReservationService {
             SELECT *
             FROM reservation
             JOIN possiblehours ON reservation.startHourId = possiblehours.id
-            WHERE (:startHourId >= startHourId AND :startHourId < endHourId)
-            OR (:endHourId > startHourId AND :endHourId <= endHourId)
+            WHERE (
+            (:startHourId >= startHourId AND :startHourId < endHourId)
+            OR (:endHourId >= startHourId AND :endHourId <= endHourId)
+            )
             AND reservation.day = :day 
             AND reservation.salleId = :salleId 
             ");
@@ -89,9 +91,9 @@ class ReservationService {
         $userId = $_POST['userId']; 
         $title = $_POST['title'];
 
-        if ($this->isAlreadyBooked($salleId, $day,$startHourId, $endHourId)) {
+        /*if ($this->isAlreadyBooked($salleId, $day,$startHourId, $endHourId)) {
             return array("error" => true, "message" => "Ce créneau est déjà réservé.");
-        }
+        }*/
 
         if ($startHourId >= $endHourId) {
             return array("error" => true, "message" => "La date de début intervient après la date de fin.");
@@ -125,9 +127,9 @@ class ReservationService {
         $userId = $_POST['userId']; 
         $title = $_POST['title'];
 
-        if ($this->isAlreadyBooked($salleId, $day,$startHourId, $endHourId)) {
+        /*if ($this->isAlreadyBooked($salleId, $day,$startHourId, $endHourId)) {
             return array("error" => true, "message" => "Ce créneau est déjà réservé.");
-        }
+        }*/
 
         if ($startHourId >= $endHourId) {
             return array("error" => true, "message" => "La date de début intervient après la date de fin.");

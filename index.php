@@ -16,17 +16,8 @@ $router->get('/', function() {
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
-    header("Location: /home");
-});
-
-
-$router->get('/home', function() { 
-
-    $loginGuardControler = new LoginGuardControler();
-    $loginGuardControler->preventAccessIfNotLoggedIn();
-
-    $controler = new HomeControler();
-    $controler->get();
+    $day =  $date = date('Y-m-d');
+    header("Location: /reservations/".$day);
 });
 
 

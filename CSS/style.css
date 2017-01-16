@@ -70,6 +70,14 @@ table {
     opacity: 0.0;
 }
 
+.well-warning {
+    background-color: #fcf8e3;
+}
+
+.well-success {
+    background-color: #dff0d8;
+}
+
 
 /* ==========================================================================
    Login page
