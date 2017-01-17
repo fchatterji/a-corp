@@ -91,7 +91,7 @@
         <!-- reservation layer -->
         <div class="reservationContainer">
 
-        <?php foreach($tableData as $key => $reservation): ?>
+        <?php foreach($reservations as $key => $reservation): ?>
 
             <!-- calculate the coordinates to position the reservation -->
             <?php

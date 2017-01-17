@@ -14,7 +14,7 @@ class RegisterControler {
     }
 
     public function post() {
-        /* register a user and redirect to home page */
+        /* register a user and redirect to login page */
         $array = $this->service->register();
 
         $error = $array["error"];

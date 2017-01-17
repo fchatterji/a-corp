@@ -9,15 +9,16 @@ class LoginControler {
         $this->service = new AuthService();
     }
 
-
     public function get() {
-
+        /* display login page */
         $isLogged = $this->service->isLogged();
         include("Views/LoginView.php");            
     }
 
     public function post() {
         /* login then redirect to reservations page */
+
+        // login
         $array = $this->service->login();
 
         $error = $array["error"];

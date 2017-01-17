@@ -101,6 +101,11 @@ class ReservationService {
             return array("error" => true, "message" => "La date de début intervient après la date de fin.");
         }
 
+        include 'Tools/isValidDay.php';
+        if (!isValidDay($day)) {
+            return array("error" => true, "message" => "Le format de jour choisi n'est pas valide.");
+        }
+
     	$stmt = $this->connection->prepare("
             INSERT INTO reservation (id, salleId, day, startHourId, endHourId, numGuests, userId, title) 
             VALUES (NULL, :salleId, :day, :startHourId, :endHourId, :numGuests, :userId, :title)
@@ -137,6 +142,11 @@ class ReservationService {
             return array("error" => true, "message" => "La date de début intervient après la date de fin.");
         }
 
+        include 'Tools/isValidDay.php';
+        if (!isValidDay($day)) {
+            return array("error" => true, "message" => "Le format de jour choisi n'est pas valide.");
+        }
+
 
     	$stmt = $this->connection->prepare("
             UPDATE reservation 
@@ -154,7 +164,7 @@ class ReservationService {
         $stmt->bindParam(':title', $title);
     	$stmt->execute(); 	
 
-        return array("error" => false, "message" => "La réservation a bien mise à jour.");
+        return array("error" => false, "message" => "La réservation a bien été mise à jour.");
     }
 
     public function deleteReservation($id) {
