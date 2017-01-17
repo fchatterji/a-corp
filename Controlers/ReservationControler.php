@@ -29,7 +29,7 @@ class ReservationControler {
         $userId = $this->authService->getUserId();
 
         // get all reservations for each possible start hour. Store it in the reservationListByHour array
-        $tableData = $this->reservationService->getReservationsByDay($day);
+        $reservations = $this->reservationService->getReservationsByDay($day);
 
 
         // make $day variables available in the view
@@ -38,8 +38,6 @@ class ReservationControler {
         $nextDay = date('Y-m-d', strtotime("+1 day", strtotime($day)));
 
         include("Views/ReservationListView.php");
-
-
     }
 
     public function post() {
@@ -48,11 +46,13 @@ class ReservationControler {
 
         if ($array["error"]) {
             $_SESSION["reservationErrorMessage"] = $array["message"];
+            $day = date("Y-m-d");
+        } else {
+            $day = $_POST['day'];            
         }
 
-        $day = $_POST['day'];
         header("Location: /reservations/".$day);
-        exit();	
+        exit(); 
     }
 
     public function put($id) {
@@ -61,9 +61,11 @@ class ReservationControler {
 
         if ($array["error"]) {
             $_SESSION["reservationErrorMessage"] = $array["message"];
+            $day = date("Y-m-d");
+        } else {
+            $day = $_POST['day'];            
         }
 
-        $day = $_POST['day'];
         header("Location: /reservations/".$day);
         exit();	
     }
