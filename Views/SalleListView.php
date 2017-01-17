@@ -90,6 +90,7 @@
 
                     <!-- Modal Body -->
                     <div class="modal-body">
+                        <p class="alert alert-danger">Attention, la suppression d'une salle entraîne la suppression des réservations liées à cette salle.</p>
 
                         <form action="/salle/delete/<?php echo $salle['id'] ?>" method="post">
                             <button type="submit" class="btn btn-primary pull-right">Confirmer</button>
