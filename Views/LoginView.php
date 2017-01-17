@@ -1,39 +1,41 @@
 <?php include "Partials/header.php"; ?>
 
+<!-- navigation -->
 <?php 
 if ($isLogged) {
     include "Partials/loggedInNav.php"; 
 } else {
     include "Partials/loggedOutNav.php"; 
 }
-
-
 ?>
 
 
-<?php if (isset($_SESSION['loginErrorMessage'])): ?>
-    <p class="alert alert-danger">
-    <?php echo $_SESSION['loginErrorMessage']; ?>
-    <?php unset($_SESSION['loginErrorMessage']); ?>
-    </p>
-<?php endif ?>
+<!-- login and register messages -->
+<div class="row">
+    <?php if (isset($_SESSION['loginErrorMessage'])): ?>
+        <p class="alert alert-danger">
+        <?php echo $_SESSION['loginErrorMessage']; ?>
+        <?php unset($_SESSION['loginErrorMessage']); ?>
+        </p>
+    <?php endif ?>
 
-<?php if (isset($_SESSION['registerErrorMessage'])): ?>
-    <p class="alert alert-danger">
-    <?php echo $_SESSION['registerErrorMessage']; ?>
-    <?php unset($_SESSION['registerErrorMessage']); ?>
-    </p>
-<?php endif ?>
+    <?php if (isset($_SESSION['registerErrorMessage'])): ?>
+        <p class="alert alert-danger">
+        <?php echo $_SESSION['registerErrorMessage']; ?>
+        <?php unset($_SESSION['registerErrorMessage']); ?>
+        </p>
+    <?php endif ?>
 
-<?php if (isset($_SESSION['registerSuccessMessage'])): ?>
-    <p class="alert alert-success">
-    <?php echo $_SESSION['registerSuccessMessage']; ?>
-    <?php unset($_SESSION['registerSuccessMessage']); ?>
-    </p>
-<?php endif ?>
+    <?php if (isset($_SESSION['registerSuccessMessage'])): ?>
+        <p class="alert alert-success">
+        <?php echo $_SESSION['registerSuccessMessage']; ?>
+        <?php unset($_SESSION['registerSuccessMessage']); ?>
+        </p>
+    <?php endif ?>
+</div>
 
 
-
+<!-- login and register panel -->
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-login">
@@ -109,6 +111,7 @@ if ($isLogged) {
 
     $(function() {
 
+        // hides the login form and shows the register form
         $('#login-form-link').click(function(e) {
             $("#login-form").delay(100).fadeIn(100);
             $("#register-form").fadeOut(100);
@@ -117,6 +120,7 @@ if ($isLogged) {
             e.preventDefault();
         });
 
+        // hides the register form and shows the login form
         $('#register-form-link').click(function(e) {
             $("#register-form").delay(100).fadeIn(100);
             $("#login-form").fadeOut(100);

@@ -1,6 +1,7 @@
 <?php include "Partials/header.php"; ?>
 <?php include "Partials/loggedInNav.php"; ?>
 
+
 <div class="row">
     <?php foreach ($salleList as $salle): ?>
 
@@ -104,44 +105,46 @@
     <?php endforeach; ?>
 </div>
 
-<!-- Button trigger for create salle modal -->
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ajouterSalleModal">
-    Ajouter une salle
-</button>
+<div class="row">
 
-<!-- Create Salle Modal -->
-<div class="modal fade" id="ajouterSalleModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>&times;</span>
-                    <span class="sr-only">Close</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    Ajouter une salle
-                </h4>
+    <!-- Button trigger for create salle modal -->
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ajouterSalleModal">
+        Ajouter une salle
+    </button>
+
+    <!-- Create Salle Modal -->
+    <div class="modal fade" id="ajouterSalleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Ajouter une salle
+                    </h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+
+                    <form action="/salle/create" method="post">
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" required name="name" id="name" placeholder="Nom" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="places">Nombre de places</label>
+                            <input type="number" required name="places" id="places" placeholder="Nombre de places" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter une salle</button>
+                    </form>
+
+                </div>
             </div>
-
-            <!-- Modal Body -->
-            <div class="modal-body">
-
-                <form action="/salle/create" method="post">
-                    <div class="form-group">
-                        <label for="name">Nom</label>
-                        <input type="text" required name="name" id="name" placeholder="Nom" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="places">Nombre de places</label>
-                        <input type="number" required name="places" id="places" placeholder="Nombre de places" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Ajouter une salle</button>
-                </form>
-
-            </div>
-
         </div>
     </div>
 </div>

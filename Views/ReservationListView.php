@@ -2,24 +2,27 @@
 <?php include "Partials/loggedInNav.php"; ?>
 
 
-<?php if (isset($_SESSION['reservationErrorMessage'])): ?>
-    <p class="alert alert-danger">
-    <?php echo $_SESSION['reservationErrorMessage']; ?>
-    <?php unset($_SESSION['reservationErrorMessage']); ?>
-    </p>
-<?php endif ?>
+<!-- messages -->
+<div class="row">
+    <?php if (isset($_SESSION['reservationErrorMessage'])): ?>
+        <p class="alert alert-danger">
+        <?php echo $_SESSION['reservationErrorMessage']; ?>
+        <?php unset($_SESSION['reservationErrorMessage']); ?>
+        </p>
+    <?php endif ?>
 
 
-<?php if (isset($_SESSION['loginSuccessMessage'])): ?>
-    <p class="alert alert-success">
-    <?php echo $_SESSION['loginSuccessMessage']; ?>
-    <?php unset($_SESSION['loginSuccessMessage']); ?>
-    </p>
-<?php endif ?>
+    <?php if (isset($_SESSION['loginSuccessMessage'])): ?>
+        <p class="alert alert-success">
+        <?php echo $_SESSION['loginSuccessMessage']; ?>
+        <?php unset($_SESSION['loginSuccessMessage']); ?>
+        </p>
+    <?php endif ?>
+</div>
 
 
+<!-- date picker -->
 <div class="row"> 
-
     <div class="col-md-12 text-center datePickerControls">
         <a class="btn btn-default btn-lg" 
         href="/reservations/<?php echo $previousDay ?>">
@@ -35,10 +38,11 @@
 </div>
 
 
-
+<!-- reservations table -->
 <div class="row">
     <div class="col-md-12">
 
+        <!-- table layer -->
         <table class=" table table-responsive table-bordered">
 
             <thead>
@@ -84,9 +88,9 @@
         </table>
 
 
-
         <!-- reservation layer -->
         <div class="reservationContainer">
+
         <?php foreach($tableData as $key => $reservation): ?>
 
             <!-- calculate the coordinates to position the reservation -->
@@ -122,23 +126,22 @@
 
             <!-- if the reservation exists but wasn't created by the current user, modal to alert the user -->
             <?php elseif ($reservation['userId'] !== $userId): ?>
-            <div class="reservation text-center well well-warning" id="<?php echo $reservation['id']; ?>">
-            
-                <a 
+                <div class="reservation text-center well well-warning" id="<?php echo $reservation['id']; ?>">
+                    <a 
                     href="#" 
                     data-toggle="modal" 
                     data-target="#alertNotCorrectUserModal"
-                >
-                    <?php echo $reservation['title'] ?>
-                </a>
-            </div>
+                    >
+                        <?php echo $reservation['title'] ?>
+                    </a>
+                </div>
             
             <?php endif; ?>
 
 
             <script type="text/javascript">
+                // code here uses the coordinates calculated in php to position the reservation in the table 
                 var reservation = (<?php echo json_encode($reservation); ?>);
-                console.log(reservation);
 
                 var tdClass = ".td" + reservation['salleId'];
 
@@ -159,6 +162,7 @@
             </script>
 
         <?php endforeach; ?>
+
         </div>
     </div>
 </div>
@@ -166,7 +170,7 @@
 <?php include "Partials/createReservationModal.php" ?>
 <?php include "Partials/updateReservationModal.php" ?>
 
-<!-- position reservations script -->
+<!-- position reservations layer -->
 <script type="text/javascript">
     
 $( ".reservationContainer" ).position({

@@ -96,6 +96,7 @@
 
         var modal = $(this);
 
+        // add default values
         modal.find("#startHourId option").filter(function() {
             return this.text == startHour; 
         }).attr('selected', true);

@@ -33,9 +33,6 @@
 
     <!-- javascript -->
     <script src="/JS/script.js"></script> 
-       
-    <!-- favicon -->
-     <link rel="icon" href="/Images/favicon.png">
 
 </head>
 

@@ -110,11 +110,13 @@
 
 
 <script type="text/javascript">
+    // this script sets up the modal data so that it reflects current day, date, hour and 
+    // reservation info
 
     $('#updateReservationModal').on('show.bs.modal', function (event) {
         var link = $(event.relatedTarget); // Button that triggered the modal
 
-        // Extract info from data-* attributes
+        // Extract info from data-* attributes in html
         var startHourId = link.data('starthourid'); 
         var endHourId = link.data('endhourid'); 
         var currentSalleId = link.data('currentsalleid');
@@ -127,6 +129,7 @@
 
         var modal = $(this);
 
+        // set values
         modal.find('#startHourId').val(startHourId);
         modal.find('#endHourId').val(endHourId);
         modal.find('#salleId').val(currentSalleId);
@@ -141,8 +144,6 @@
         modal.find("#deleteReservationForm").attr("action", "/reservation/delete/" + reservationId);
 
     });
-
-
 
 </script>
 
