@@ -19,7 +19,7 @@ class AuthService {
         
         $this->connection = Connexion::init();
         $this->config = new PHPAuth\Config($this->connection);
-        $this->auth = new PHPAuth\Auth($this->connection, $this->config);
+        $this->auth = new PHPAuth\Auth($this->connection, $this->config, "fr_FR");
     }
 
     public function isLogged() {
