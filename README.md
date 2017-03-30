@@ -6,7 +6,7 @@ Pour installer le projet , il faut d’abord télécharger les fichiers sources 
 
 ### Installation des dépendances
 Installer php composer
-Installer les dépendences avec la commande php composer.phar install
+Installer les dépendences avec la commande composer install
 
 ### Configuration du serveur
 - il est nécessaire d'autoriser les requêtes de type cross site sur le serveur pour faire fonctionner le site. Sur XAMPP, il suffit d'indiquer la ligne suivante dans le fichier httpd.conf:
