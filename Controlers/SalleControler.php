@@ -2,35 +2,41 @@
 
 class SalleControler {
     /* Handle requests that concern salle entities */
-    var $service;
+    var $salleService;
+    var $authService;
     
     public function __construct() {
-        $this->service = new SalleService();
+        $this->salleService = new SalleService();
+        $this->authService = new AuthService();
     }
 
     public function getSalleList() {
         /* display a list of salles */
-        $salleList = $this->service->getSalleList();
+        $salleList = $this->salleService->getSalleList();
+
+        // get user id and user name from authservice
+        $userName = $this->authService->getUserName();
+
         include("Views/SalleListView.php");
     }
 
     public function post() {
         /* create a salle and redirect */
-        $this->service->createSalle();
+        $this->salleService->createSalle();
         header("Location: /salles");
         exit();	
     }
 
     public function put($id) {
         /* update a salle and redirect */
-        $this->service->updateSalle($id);
+        $this->salleService->updateSalle($id);
         header("Location: /salles");
         exit();	
     }
 
     public function delete($id) {
         /* delete a salle and redirect */
-        $this->service->deleteSalle($id);
+        $this->salleService->deleteSalle($id);
         header("Location: /salles");
         exit();	
     }

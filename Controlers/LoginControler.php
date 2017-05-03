@@ -3,15 +3,16 @@
 class LoginControler {
     /* handles logins */
 
-    var $service;
+    var $authService;
 
     public function __construct() {
-        $this->service = new AuthService();
+        $this->authService = new AuthService();
     }
 
     public function get() {
         /* display login page */
-        $isLogged = $this->service->isLogged();
+        $isLogged = $this->authService->isLogged();
+        $userName = $this->authService->getUserName();
         include("Views/LoginView.php");            
     }
 
@@ -19,7 +20,7 @@ class LoginControler {
         /* login then redirect to reservations page */
 
         // login
-        $array = $this->service->login();
+        $array = $this->authService->login();
 
         $error = $array["error"];
         $hash = $array["hash"];
