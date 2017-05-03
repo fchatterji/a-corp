@@ -18,6 +18,9 @@
                     <a href="/reservations/<?php echo date("Y-m-d") ?>">Réservations</a>
                 </li>
                 <li class="nav-salle">
+                    <a href="/organisms">Groupes</a>
+                </li>
+                <li class="nav-salle">
                     <a href="/salles"><span class="glyphicon glyphicon-lock"></span> Salles</a>
                 </li>
             </ul>
@@ -26,9 +29,13 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <span><?php echo $userName['username']; ?></span>
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
+                    <li class="nav-logout"><a href="">Accueil</a></li>
+                    <li class="nav-logout"><a href="/logout">Mon profil</a></li>
+                    <li class="nav-logout"><a href="/settings/<?php echo $userId; ?>">Paramètres</a></li>
                     <li class="nav-logout"><a href="/logout">Se déconnecter</a></li>
                   </ul>
                 </li>

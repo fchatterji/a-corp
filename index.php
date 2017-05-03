@@ -128,6 +128,18 @@ $router->post('/reservation/delete/(\d+)', function($id) {
     $controler->delete($id);
 });
 
+$router->get('/settings', function() { 
+
+    $controler = new SettingsControler();
+    $controler->get();
+});
+
+$router->get('/organisms', function() { 
+
+    $controler = new OrganismControler();
+    $controler->get();
+});
+
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     include "Views/404ErrorView.php";
