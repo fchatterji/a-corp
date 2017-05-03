@@ -25,8 +25,9 @@ class ReservationControler {
         // get list of salles from salle service
         $salleList = $this->salleService->getSalleList();
 
-        // get user id from authservice
+        // get user id and user name from authservice
         $userId = $this->authService->getUserId();
+        $userName = $this->authService->getUserName();
 
         // get all reservations for each possible start hour. Store it in the reservationListByHour array
         $reservations = $this->reservationService->getReservationsByDay($day);

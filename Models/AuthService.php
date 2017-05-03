@@ -3,7 +3,7 @@
 class AuthService {
 	/* Authentication service
 
-    Note: the authentication service is just a wrapper around the php auth 
+    Note: the authentication service is in part a wrapper around the php auth 
     class, which contains all the logic and code. It is used here to 
     provide a consistent interface and to facilitate eventual changes of
     auth system.
@@ -113,8 +113,6 @@ class AuthService {
 
         Parameters:
 
-            $hash (string): The session hash
-
         Returns:
 
             $uid (int): User's ID
@@ -124,9 +122,32 @@ class AuthService {
             return $this->auth->getSessionUID($hash);
         } else {
             return -1;
-        }
+        }  
+    }
+
+    public function getUserName() {
+        /* Retrieves the username associated with a given user id
+
+        Returns:
         
-        
+            $username: user's username
+        */
+
+        $id = $this->getUserId();
+
+        $stmt = $this->connection->prepare("
+            SELECT username
+            FROM users 
+            WHERE users.id = :id
+            ");
+
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $username = $stmt->fetch();
+
+        return $username;  
     }
 }
 
