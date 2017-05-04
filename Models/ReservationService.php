@@ -29,17 +29,17 @@ class ReservationService {
         return $result;
     }
 
-    public function getReservationById($id) {
+    public function getReservationById($reservationId) {
         /* get a single reservation with a given id */
     	$stmt = $this->connection->prepare("
             SELECT *
             FROM reservation 
             JOIN salle ON reservation.salleId = salle.id 
             JOIN possiblehours ON reservation.hourId = possiblehours.id 
-            WHERE reservation.id = :id 
+            WHERE reservation.id = :reservationId 
             ");
 
-    	$stmt->bindParam(':id', $id);
+    	$stmt->bindParam(':reservationId', $reservationId);
     	$stmt->execute();
 
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -123,7 +123,7 @@ class ReservationService {
         return array("error" => false, "message" => "La réservation a bien été créée.");
     }
 
-    public function updateReservation($id) {
+    public function updateReservation($reservationId) {
         /* update a reservation */
 
         $salleId = $_POST['salleId'];
@@ -134,7 +134,7 @@ class ReservationService {
         $userId = $_POST['userId']; 
         $title = $_POST['title'];
 
-        if ($this->isAlreadyBooked($salleId, $day,$startHourId, $endHourId, $id)) {
+        if ($this->isAlreadyBooked($salleId, $day,$startHourId, $endHourId, $reservationId)) {
             return array("error" => true, "message" => "Ce créneau est déjà réservé.");
         }
 
@@ -150,11 +150,17 @@ class ReservationService {
 
     	$stmt = $this->connection->prepare("
             UPDATE reservation 
-            SET salleId=:salleId, day=:day, startHourId=:startHourId, endHourId=:endHourId, numGuests=:numGuests, userId=:userId, title=:title
-            WHERE id=:id
+            SET salleId=:salleId, 
+                day=:day, 
+                startHourId=:startHourId, 
+                endHourId=:endHourId, 
+                numGuests=:numGuests, 
+                userId=:userId, 
+                title=:title
+            WHERE id=:reservationId
             ");
 
-    	$stmt->bindParam(':id', $id);
+    	$stmt->bindParam(':reservationId', $reservationId);
     	$stmt->bindParam(':salleId', $salleId);
     	$stmt->bindParam(':day', $day);
         $stmt->bindParam(':startHourId', $startHourId);
@@ -167,11 +173,14 @@ class ReservationService {
         return array("error" => false, "message" => "La réservation a bien été mise à jour.");
     }
 
-    public function deleteReservation($id) {
+    public function deleteReservation($reservationId) {
         /* delete a reservation */
-    	$stmt = $this->connection->prepare("DELETE FROM reservation WHERE id=:id");
+    	$stmt = $this->connection->prepare("
+            DELETE FROM reservation 
+            WHERE id=:reservationId
+        ");
 
-    	$stmt->bindParam(':id', $id);
+    	$stmt->bindParam(':reservationId', $reservationId);
     	$stmt->execute();
     }
 }

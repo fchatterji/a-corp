@@ -26,11 +26,15 @@ class SalleService {
         return $result;
     }
 
-    public function getSalleById($id) {
+    public function getSalleById($salleId) {
         /* get a single salle with the given id */
-    	$stmt = $this->connection->prepare("SELECT * FROM salle WHERE id=:id");
+    	$stmt = $this->connection->prepare("
+            SELECT * 
+            FROM salle 
+            WHERE id=:salleId
+        ");
 
-    	$stmt->bindParam(':id', $id);
+    	$stmt->bindParam(':salleId', $salleId);
     	$stmt->execute();
 
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -45,32 +49,42 @@ class SalleService {
         $name = $_POST['name'];
         $places = $_POST['places'];
         
-    	$stmt = $this->connection->prepare("INSERT INTO salle (id, name, places) VALUES (NULL, :name, :places)");
+    	$stmt = $this->connection->prepare("
+            INSERT INTO salle (id, name, places) 
+            VALUES (NULL, :name, :places)
+        ");
 
     	$stmt->bindParam(':name', $name);
     	$stmt->bindParam(':places', $places);
     	$stmt->execute();
     }
 
-    public function updateSalle($id) {
+    public function updateSalle($salleId) {
         /* update a salle */
 
         $name = $_POST['name'];
         $places = $_POST['places'];
 
-    	$stmt = $this->connection->prepare("UPDATE salle SET name=:name, places=:places WHERE id=:id");
+    	$stmt = $this->connection->prepare("
+            UPDATE salle 
+            SET name=:name, places=:places 
+            WHERE id=:salleId
+        ");
 
-    	$stmt->bindParam(':id', $id);
+    	$stmt->bindParam(':salleId', $salleId);
     	$stmt->bindParam(':name', $name);
     	$stmt->bindParam(':places', $places);
     	$stmt->execute();	
     }
 
-    public function deleteSalle($id) {
+    public function deleteSalle($salleId) {
         /* delete a salle */
-    	$stmt = $this->connection->prepare("DELETE FROM salle WHERE id=:id");
+    	$stmt = $this->connection->prepare("
+            DELETE FROM salle 
+            WHERE id=:salleId
+        ");
 
-    	$stmt->bindParam(':id', $id);
+    	$stmt->bindParam(':salleId', $salleId);
     	$stmt->execute();
     }
 }
