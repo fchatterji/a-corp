@@ -11,6 +11,12 @@
                 <div class="caption">
                     <h3><?php echo $organism['name'] ?></h3>
 
+                    <p>Vous êtes le <?php echo $organism['role'] ?> de ce groupe</p>
+
+                    <a href="/organisms/droits" class="btn btn-alert">Gérer les droits</a>
+
+
+
                     <p>
                         <!-- Button trigger delete modal -->
                         <button class="btn btn-default" data-toggle="modal" data-target="#deleteOrganismModal<?php echo $organism['id']?>">
