@@ -182,12 +182,23 @@ $router->post('/organism/delete/(\d+)', function($id) {
 });
 
 
+// MEMBERSHIPS
+$router->get('/organisms/droits/(\d+)', function($id) {
+
+    $loginGuardControler = new LoginGuardControler();
+    $loginGuardControler->preventAccessIfNotLoggedIn(); 
+
+    $controler = new MembershipControler();
+    $controler->getMembershipList($id);
+});
+
 
 // 404
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     include "Views/404ErrorView.php";
 });
+
 
 // Run it!
 $router->run();
