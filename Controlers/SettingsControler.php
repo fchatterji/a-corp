@@ -13,6 +13,7 @@ class SettingsControler {
     public function get() {
         /* display a list of settings */
         $userId = $this->authService->getUserId();
+        $userName = $this->authService->getUserName();
         $settings = $this->settingsService->getSettings($userId);
         include("Views/SettingsView.php");
     }
