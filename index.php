@@ -11,6 +11,9 @@ Autoloader::register();
 $router = new \Bramus\Router\Router();
 
 // Define routes
+
+
+// LOGIN PROCESS 
 $router->get('/', function() { 
 
     $loginGuardControler = new LoginGuardControler();
@@ -45,6 +48,8 @@ $router->get('/logout', function() {
     $controler->get();
 });
 
+
+// SALLES
 $router->get('/salles', function() { 
 
     $adminGuardControler = new AdminGuardControler();
@@ -84,6 +89,8 @@ $router->post('/salle/delete/(\d+)', function($id) {
     $controler->delete($id);
 });
 
+
+// RESERVATIONS
 $router->get('/reservations/([a-z0-9_-]+)', function($day) { 
 
     $loginGuardControler = new LoginGuardControler();
@@ -128,18 +135,55 @@ $router->post('/reservation/delete/(\d+)', function($id) {
     $controler->delete($id);
 });
 
+
+// SETTINGS
 $router->get('/settings', function() { 
 
     $controler = new SettingsControler();
     $controler->get();
 });
 
-$router->get('/organisms', function() { 
+
+//ORGANISMS
+$router->get('/organisms', function() {
+
+    $loginGuardControler = new LoginGuardControler();
+    $loginGuardControler->preventAccessIfNotLoggedIn(); 
 
     $controler = new OrganismControler();
     $controler->get();
 });
 
+$router->post('/organism/create', function() { 
+
+    $loginGuardControler = new LoginGuardControler();
+    $loginGuardControler->preventAccessIfNotLoggedIn();
+
+    $controler = new OrganismControler();
+    $controler->post();
+});
+
+$router->post('/organism/update/(\d+)', function($id) {
+
+    $loginGuardControler = new LoginGuardControler();
+    $loginGuardControler->preventAccessIfNotLoggedIn();
+
+    $controler = new OrganismControler();
+    $controler->put($id);
+});
+
+$router->post('/organism/delete/(\d+)', function($id) { 
+
+    $loginGuardControler = new LoginGuardControler();
+    $loginGuardControler->preventAccessIfNotLoggedIn();
+
+    $controler = new OrganismControler();
+    $controler->delete($id);
+});
+
+
+
+// 404
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     include "Views/404ErrorView.php";

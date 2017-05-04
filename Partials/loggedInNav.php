@@ -17,7 +17,7 @@
                 <li class="nav-reservation">
                     <a href="/reservations/<?php echo date("Y-m-d") ?>">Réservations</a>
                 </li>
-                <li class="nav-salle">
+                <li class="nav-organism">
                     <a href="/organisms">Groupes</a>
                 </li>
                 <li class="nav-salle">
@@ -35,7 +35,7 @@
                   <ul class="dropdown-menu">
                     <li class="nav-logout"><a href="">Accueil</a></li>
                     <li class="nav-logout"><a href="/logout">Mon profil</a></li>
-                    <li class="nav-logout"><a href="/settings/<?php echo $userId; ?>">Paramètres</a></li>
+                    <li class="nav-logout"><a href="/settings">Paramètres</a></li>
                     <li class="nav-logout"><a href="/logout">Se déconnecter</a></li>
                   </ul>
                 </li>

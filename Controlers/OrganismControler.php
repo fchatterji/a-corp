@@ -12,9 +12,30 @@ class OrganismControler {
 
     public function get() {
         $userId = $this->authService->getUserId();
-        $organisms = $this->organismService->getOrganisms($userId);
+        $organismList = $this->organismService->getOrganismList($userId);
         $userName = $this->authService->getUserName();
-        include("Views/OrganismView.php");
+        include("Views/OrganismListView.php");
+    }
+
+    public function post() {
+        /* create an organism and redirect */
+        $this->organismService->createOrganism();
+        header("Location: /organisms");
+        exit(); 
+    }
+
+    public function put($id) {
+        /* update an organism and redirect */
+        $this->organismService->updateOrganism($id);
+        header("Location: /organisms");
+        exit(); 
+    }
+
+    public function delete($id) {
+        /* delete an organism and redirect */
+        $this->organismService->deleteOrganism($id);
+        header("Location: /organisms");
+        exit(); 
     }
 }
 ?>
