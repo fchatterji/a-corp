@@ -13,15 +13,13 @@ class SettingsService {
         $this->connection = Connexion::init();
     }
 
-    public function getSettings($userId) {
+    public function getSettings() {
         /* get all settings */
         $stmt = $this->connection->prepare("
             SELECT *
             FROM settings
-            WHERE userId=:userId
         ");
 
-        $stmt->bindParam(':userId', $userId);
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 
