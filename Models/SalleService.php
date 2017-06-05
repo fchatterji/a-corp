@@ -10,13 +10,15 @@ class SalleService {
         $this->connection = Connexion::init();
     }
 
-    public function getSalleList() {
+    public function getSalleList($organismId) {
         /* get all salles */
     	$stmt = $this->connection->prepare("
             SELECT * FROM salle
+            WHERE organismId = :organismId
             ORDER BY salle.name
             ");
 
+        $stmt->bindParam(':organismId', $organismId);
     	$stmt->execute();
 
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -26,15 +28,17 @@ class SalleService {
         return $result;
     }
 
-    public function getSalleById($salleId) {
+    public function getSalleByIdAndOrganism($organismId, $salleId) {
         /* get a single salle with the given id */
     	$stmt = $this->connection->prepare("
             SELECT * 
             FROM salle 
             WHERE id=:salleId
+            AND organismId = :organismId
         ");
 
     	$stmt->bindParam(':salleId', $salleId);
+        $stmt->bindParam(':organismId', $organismId);
     	$stmt->execute();
 
     	$stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -43,19 +47,20 @@ class SalleService {
         return $result;
     }
 
-    public function createSalle() {
+    public function createSalle($organismId) {
         /* create a salle */
 
         $name = $_POST['name'];
         $places = $_POST['places'];
         
     	$stmt = $this->connection->prepare("
-            INSERT INTO salle (id, name, places) 
-            VALUES (NULL, :name, :places)
+            INSERT INTO salle (id, name, places, organismId) 
+            VALUES (NULL, :name, :places, :organismId)
         ");
 
     	$stmt->bindParam(':name', $name);
     	$stmt->bindParam(':places', $places);
+        $stmt->bindParam(':organismId', $organismId);
     	$stmt->execute();
     }
 

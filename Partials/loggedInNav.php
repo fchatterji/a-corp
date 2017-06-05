@@ -15,13 +15,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="nav-reservation">
-                    <a href="/reservations/<?php echo date("Y-m-d") ?>">Réservations</a>
+                    <a href="/<?php echo $organismId ?>/reservations/<?php echo date("Y-m-d") ?>">Réservations</a>
                 </li>
                 <li class="nav-organism">
-                    <a href="/organisms">Groupes</a>
+                    <a href="/<?php echo $organismId ?>/organisms">Groupes</a>
                 </li>
                 <li class="nav-salle">
-                    <a href="/salles"><span class="glyphicon glyphicon-lock"></span> Salles</a>
+                    <a href="/<?php echo $organismId ?>/salles"><span class="glyphicon glyphicon-lock"></span> Salles</a>
                 </li>
             </ul>
 
@@ -35,7 +35,7 @@
                   <ul class="dropdown-menu">
                     <li class="nav-logout"><a href="">Accueil</a></li>
                     <li class="nav-logout"><a href="/logout">Mon profil</a></li>
-                    <li class="nav-logout"><a href="/settings">Paramètres</a></li>
+                    <li class="nav-logout"><a href="/<?php echo $organismId ?>/settings">Paramètres</a></li>
                     <li class="nav-logout"><a href="/logout">Se déconnecter</a></li>
                   </ul>
                 </li>

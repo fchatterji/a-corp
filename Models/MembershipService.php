@@ -15,12 +15,12 @@ class MembershipService {
         /* create an membership */
         
         $stmt = $this->connection->prepare("
-            INSERT INTO membership (id, user, organism, role) 
-            VALUES (NULL, :user, :organism, :role)
+            INSERT INTO membership (id, userId, organismId, role) 
+            VALUES (NULL, :userId, :organismId, :role)
         ");
 
-        $stmt->bindParam(':user', $user);
-        $stmt->bindParam(':organism', $organism);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->bindParam(':organismId', $organismId);
         $stmt->bindParam(':role', $role);
         $stmt->execute();
 

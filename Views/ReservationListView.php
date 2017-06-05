@@ -1,7 +1,6 @@
 <?php include "Partials/header.php"; ?>
 <?php include "Partials/loggedInNav.php"; ?>
 
-
 <!-- messages -->
 <div class="row">
     <?php if (isset($_SESSION['reservationErrorMessage'])): ?>
@@ -25,13 +24,13 @@
 <div class="row"> 
     <div class="col-md-12 text-center datePickerControls">
         <a class="btn btn-default btn-lg" 
-        href="/reservations/<?php echo $previousDay ?>">
+        href="/<?php echo $organismId ?>/reservations/<?php echo $previousDay ?>">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         </a> 
         
         <input data-toggle="datepicker" id="datepicker" class="btn btn-default btn-lg">
         
-        <a class="btn btn-default btn-lg" href="/reservations/<?php echo $nextDay ?>">
+        <a class="btn btn-default btn-lg" href="/<?php echo $organismId ?>/reservations/<?php echo $nextDay ?>">
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         </a>
     </div>
@@ -116,6 +115,7 @@
                     data-userid="<?php echo $userId;?>"
                     data-numguests="<?php echo $reservation['numGuests'];?>"
                     data-reservationid="<?php echo $reservation['id'];?>"
+                    data-organismid ="<?php echo $organismId;?>"
                     data-title="<?php echo $reservation['title'];?>"
                     >
                         <?php echo $reservation['title'] ?>

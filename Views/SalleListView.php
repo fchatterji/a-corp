@@ -48,7 +48,7 @@
                     <!-- Modal Body -->
                     <div class="modal-body">
 
-                        <form action="<?php echo "/salle/update/".htmlspecialchars($salle['id']) ?>" method="post">
+                        <form action="<?php echo "/{$organismId}/salle/update/".htmlspecialchars($salle['id']) ?>" method="post">
 
                             <div class="form-group">
                                 <label for="name">Nom</label>
@@ -92,7 +92,7 @@
                     <div class="modal-body">
                         <p class="alert alert-danger">Attention, la suppression d'une salle entraîne la suppression des réservations liées à cette salle.</p>
 
-                        <form action="/salle/delete/<?php echo $salle['id'] ?>" method="post">
+                        <form action="/<?php echo $organismId ?>/salle/delete/<?php echo $salle['id'] ?>" method="post">
                             <button type="submit" class="btn btn-primary pull-right">Confirmer</button>
                         </form>
 
@@ -131,7 +131,7 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
 
-                    <form action="/salle/create" method="post">
+                    <form action="/<?php echo $organismId ?>/salle/create" method="post">
                         <div class="form-group">
                             <label for="name">Nom</label>
                             <input type="text" required name="name" id="name" placeholder="Nom" class="form-control">

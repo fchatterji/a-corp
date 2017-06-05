@@ -126,6 +126,11 @@
         var title = link.data('title');
         var reservationId = link.data('reservationid');
         var numGuests = link.data('numguests');
+        var organismId = link.data('organismId');
+
+        console.log(organismId);
+        console.log('test');
+        console.log(link.data);
 
         var modal = $(this);
 
@@ -140,8 +145,8 @@
 
         modal.find('#numGuests').attr("max", currentSallePlaces);
 
-        modal.find("#updateReservationForm").attr("action", "/reservation/update/" + reservationId);
-        modal.find("#deleteReservationForm").attr("action", "/reservation/delete/" + reservationId);
+        modal.find("#updateReservationForm").attr("action", "/" + organismId + "/reservation/update/" + reservationId);
+        modal.find("#deleteReservationForm").attr("action", "/" + organismId + "/reservation/delete/" + reservationId);
 
     });
 

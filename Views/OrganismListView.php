@@ -13,7 +13,7 @@
 
                     <p>Vous êtes le <?php echo $organism['role'] ?> de ce groupe</p>
 
-                    <a href="/organisms/droits" class="btn btn-alert">Gérer les droits</a>
+                    <a href="/<?php echo $organism['organismId'] ?>/organisms/droits" class="btn btn-alert">Gérer les droits</a>
 
 
 
@@ -44,14 +44,14 @@
                             <span class="sr-only">Close</span>
                         </button>
                         <h4 class="modal-title" id="myModalLabel">
-                            Modifier l'organisme
+                            Modifier le groupe
                         </h4>
                     </div>
 
                     <!-- Modal Body -->
                     <div class="modal-body">
 
-                        <form action="<?php echo "/organism/update/".htmlspecialchars($organism['id']) ?>" method="post">
+                        <form action="/<?php echo $organismId ?>/organism/update" method="post">
 
                             <div class="form-group">
                                 <label for="name">Nom</label>
@@ -60,7 +60,7 @@
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 
-                            <button type="submit" class="btn btn-primary pull-right">Modifier la organism</button>
+                            <button type="submit" class="btn btn-primary pull-right">Modifier le groupe</button>
                         </form>
 
                     </div>
@@ -82,15 +82,15 @@
                             <span class="sr-only">Close</span>
                         </button>
                         <h4 class="modal-title" id="myModalLabel">
-                            Voulez-vous vraiment supprimer la organism?
+                            Voulez-vous vraiment supprimer le groupe?
                         </h4>
                     </div>
 
                     <!-- Modal Body -->
                     <div class="modal-body">
-                        <p class="alert alert-danger">Attention, la suppression d'une organism entraîne la suppression des réservations liées à cette organism.</p>
+                        <p class="alert alert-danger">Attention, la suppression d'un groupe entraîne la suppression des réservations liées à ce groupe.</p>
 
-                        <form action="/organism/delete/<?php echo $organism['id'] ?>" method="post">
+                        <form action="/<?php echo $organismId ?>/organism/delete" method="post">
                             <button type="submit" class="btn btn-primary pull-right">Confirmer</button>
                         </form>
 
@@ -108,7 +108,7 @@
 
     <!-- Button trigger for create organism modal -->
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#ajouterOrganismModal">
-        Ajouter une organism
+        Ajouter un groupe
     </button>
 
     <!-- Create Organism Modal -->
@@ -122,20 +122,20 @@
                         <span class="sr-only">Close</span>
                     </button>
                     <h4 class="modal-title" id="myModalLabel">
-                        Ajouter une organism
+                        Ajouter un groupe
                     </h4>
                 </div>
 
                 <!-- Modal Body -->
                 <div class="modal-body">
 
-                    <form action="/organism/create" method="post">
+                    <form action="/<?php echo $organismId ?>/organism/create" method="post">
                         <div class="form-group">
                             <label for="name">Nom</label>
                             <input type="text" required name="name" id="name" placeholder="Nom" class="form-control">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Ajouter une organism</button>
+                        <button type="submit" class="btn btn-primary">Ajouter un groupe</button>
                     </form>
 
                 </div>

@@ -10,11 +10,11 @@ class SettingsControler {
         $this->authService = new AuthService();
     }
 
-    public function get() {
+    public function get($organismId) {
         /* display a list of settings */
         $userId = $this->authService->getUserId();
         $userName = $this->authService->getUserName();
-        $settings = $this->settingsService->getSettings($userId);
+        $settings = $this->settingsService->getSettings($userId, $organismId);
         include("Views/SettingsView.php");
     }
 }

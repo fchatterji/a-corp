@@ -50,7 +50,7 @@ $router->get('/logout', function() {
 
 
 // SALLES
-$router->get('/salles', function() { 
+$router->get('/(\d+)/salles', function($organismId) { 
 
     $adminGuardControler = new AdminGuardControler();
     $adminGuardControler->preventAccessIfNotAdmin();
@@ -59,39 +59,39 @@ $router->get('/salles', function() {
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
     $controler = new SalleControler();
-    $controler->getSalleList();
+    $controler->getSalleList($organismId);
 });
 
-$router->post('/salle/create', function() { 
+$router->post('/(\d+)/salle/create', function($organismId) { 
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
     $controler = new SalleControler();
-    $controler->post();
+    $controler->post($organismId);
 });
 
-$router->post('/salle/update/(\d+)', function($id) {
+$router->post('/(\d+)/salle/update/(\d+)', function($organismId, $salleId) {
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
     $controler = new SalleControler();
-    $controler->put($id);
+    $controler->put($organismId, $salleId);
 });
 
-$router->post('/salle/delete/(\d+)', function($id) { 
+$router->post('/(\d+)/salle/delete/(\d+)', function($organismId, $salleId) { 
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
     $controler = new SalleControler();
-    $controler->delete($id);
+    $controler->delete($organismId, $salleId);
 });
 
 
 // RESERVATIONS
-$router->get('/reservations/([a-z0-9_-]+)', function($day) { 
+$router->get('/(\d+)/reservations/([a-z0-9_-]+)', function($organismId, $day) { 
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
@@ -102,94 +102,94 @@ $router->get('/reservations/([a-z0-9_-]+)', function($day) {
         include "Views/404ErrorView.php";
     } else {
         $controler = new ReservationControler();
-        $controler->getReservationList($day);        
+        $controler->getReservationList($organismId, $day);        
     }
 
 });
 
 
-$router->post('/reservation/create', function() { 
+$router->post('/(\d+)/reservation/create', function($organismId) { 
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
     $controler = new ReservationControler();
-    $controler->post();
+    $controler->post($organismId);
 });
 
-$router->post('/reservation/update/(\d+)', function($id) {
+$router->post('/(\d+)/reservation/update/(\d+)', function($organismId, $reservationId) {
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
     $controler = new ReservationControler();
-    $controler->put($id);
+    $controler->put($organismId, $reservationId);
 });
 
-$router->post('/reservation/delete/(\d+)', function($id) { 
+$router->post('/(\d+)/reservation/delete/(\d+)', function($organismId, $reservationId) { 
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
     $controler = new ReservationControler();
-    $controler->delete($id);
+    $controler->delete($organismId, $reservationId);
 });
 
 
 // SETTINGS
-$router->get('/settings', function() { 
+$router->get('/(\d+)/settings', function($organismId) { 
 
     $controler = new SettingsControler();
-    $controler->get();
+    $controler->get($organismId);
 });
 
 
 //ORGANISMS
-$router->get('/organisms', function() {
+$router->get('/(\d+)/organisms', function($organismId) {
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn(); 
 
     $controler = new OrganismControler();
-    $controler->get();
+    $controler->get($organismId);
 });
 
-$router->post('/organism/create', function() { 
+$router->post('/(\d+)/organism/create', function($organismId) { 
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
     $controler = new OrganismControler();
-    $controler->post();
+    $controler->post($organismId);
 });
 
-$router->post('/organism/update/(\d+)', function($id) {
+$router->post('/(\d+)/organism/update/', function($organismId) {
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
     $controler = new OrganismControler();
-    $controler->put($id);
+    $controler->put($organismId);
 });
 
-$router->post('/organism/delete/(\d+)', function($id) { 
+$router->post('/(\d+)/organism/delete', function($organismId) { 
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
     $controler = new OrganismControler();
-    $controler->delete($id);
+    $controler->delete($organismId);
 });
 
 
 // MEMBERSHIPS
-$router->get('/organisms/droits/(\d+)', function($id) {
+$router->get('/(\d+)/organisms/droits', function($organismId) {
 
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn(); 
 
     $controler = new MembershipControler();
-    $controler->getMembershipList($id);
+    $controler->getMembershipList($organismId);
 });
 
 

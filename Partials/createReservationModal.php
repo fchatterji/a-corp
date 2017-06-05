@@ -17,7 +17,7 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form action="/reservation/create" method="post" id="createReservationForm">
+                <form action="/<?php echo $organismId ?>/reservation/create" method="post" id="createReservationForm">
 
                     <div class="form-group">
                         <label for="title">Titre</label>

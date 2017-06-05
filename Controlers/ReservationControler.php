@@ -16,22 +16,24 @@ class ReservationControler {
         $this->authService = new AuthService();
     }
 
-    public function getReservationList($day) {
+    public function getReservationList($organismId, $day) {
         /* displays a table of reservations, filtered by day */
 
         // get possible hours from possible hours service
         $possibleHoursList = $this->possibleHoursService->getPossibleHours();
 
         // get list of salles from salle service
-        $salleList = $this->salleService->getSalleList();
+        $salleList = $this->salleService->getSalleList($organismId);
 
         // get user id and user name from authservice
         $userId = $this->authService->getUserId();
         $userName = $this->authService->getUserName();
 
         // get all reservations for each possible start hour. Store it in the reservationListByHour array
-        $reservations = $this->reservationService->getReservationsByDay($day);
+        $reservations = $this->reservationService->getReservationsByDayAndOrganism($organismId, $day);
 
+        // make organism variable available in the view
+        $organismId = $organismId;
 
         // make $day variables available in the view
         $day = $day;
@@ -41,9 +43,9 @@ class ReservationControler {
         include("Views/ReservationListView.php");
     }
 
-    public function post() {
+    public function post($organismId) {
         /* create a reservation and redirect */
-        $array = $this->reservationService->createReservation();
+        $array = $this->reservationService->createReservation($organismId);
 
         if ($array["error"]) {
             $_SESSION["reservationErrorMessage"] = $array["message"];
@@ -52,13 +54,13 @@ class ReservationControler {
             $day = $_POST['day'];            
         }
 
-        header("Location: /reservations/".$day);
+        header("Location: /{$organismId}/reservations/".$day);
         exit(); 
     }
 
-    public function put($id) {
+    public function put($organismId, $reservationId) {
         /* update a reservation and redirect */
-        $array = $this->reservationService->updateReservation($id);
+        $array = $this->reservationService->updateReservation($organismId, $reservationId);
 
         if ($array["error"]) {
             $_SESSION["reservationErrorMessage"] = $array["message"];
@@ -67,16 +69,16 @@ class ReservationControler {
             $day = $_POST['day'];            
         }
 
-        header("Location: /reservations/".$day);
+        header("Location: /{$organismId}/reservations/{$day}");
         exit();	
     }
 
-    public function delete($id) {
+    public function delete($organismId, $reservationId) {
         /* delete a reservation and redirect */
-        $this->reservationService->deleteReservation($id);
+        $this->reservationService->deleteReservation($organismId, $reservationId);
 
         $day = $_POST['day'];
-        header("Location: /reservations/".$day);
+        header("Location: /{$organismId}/reservations/{$day}");
         exit();	
     }
 }

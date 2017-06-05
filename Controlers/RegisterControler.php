@@ -2,10 +2,14 @@
 
 class RegisterControler {
     /* handles registering */
-    var $service;
+    var $authService;
+    var $organismService;
+    var $membershipService;
     
     public function __construct() {
-        $this->service = new AuthService();
+        $this->authService = new AuthService();
+        $this->organismService = new OrganismService();
+
     }
 
     public function get() {
@@ -15,7 +19,7 @@ class RegisterControler {
 
     public function post() {
         /* register a user and redirect to login page */
-        $array = $this->service->register();
+        $array = $this->authService->register();
 
         $error = $array["error"];
         $registerMessage = $array["message"];
@@ -26,11 +30,12 @@ class RegisterControler {
             exit();
 
         } else {
+
             $_SESSION["registerSuccessMessage"] = $registerMessage;
             header("Location: /login");
             exit();            
         }
     }
 }
-?>
 
+?>

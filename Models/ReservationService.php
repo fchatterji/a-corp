@@ -10,7 +10,7 @@ class ReservationService {
         $this->connection = Connexion::init();
     }
 
-    public function getReservationsByDay($day) {
+    public function getReservationsByDayAndOrganism($organismId, $day) {
 
         $stmt = $this->connection->prepare("
             SELECT reservation.id, reservation.salleId, reservation.day, reservation.startHourId, reservation.endHourId, reservation.numGuests, reservation.userId, reservation.title, salle.name, salle.places, possiblehours.hour
@@ -18,9 +18,11 @@ class ReservationService {
             JOIN salle ON salle.id = reservation.salleId
             JOIN possiblehours on possiblehours.id = reservation.startHourId
             WHERE reservation.day = :day
+            AND reservation.organismId = :organismId
             ");
 
         $stmt->bindParam(':day', $day);
+        $stmt->bindParam(':organismId', $organismId);
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -48,7 +50,7 @@ class ReservationService {
         return $result;	
     }
 
-    public function isAlreadyBooked($salleId, $day, $startHourId, $endHourId, $id=0) {
+    public function isAlreadyBooked($salleId, $day, $startHourId, $endHourId, $organismId, $id=0) {
 
         $stmt = $this->connection->prepare("
             SELECT *
@@ -61,6 +63,7 @@ class ReservationService {
             AND reservation.day = :day 
             AND reservation.salleId = :salleId
             AND reservation.id != :id
+            AND reservation.organismId = :organismId
             ");
 
         $stmt->bindParam(':salleId', $salleId);
@@ -68,6 +71,7 @@ class ReservationService {
         $stmt->bindParam(':startHourId', $startHourId);
         $stmt->bindParam(':endHourId', $endHourId);
         $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':organismId', $organismId);
         $stmt->execute();    
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -82,7 +86,7 @@ class ReservationService {
         return $isBooked;
     }
 
-    public function createReservation() {
+    public function createReservation($organismId) {
         /* insert a new reservation in the database */
 
         $salleId = $_POST['salleId'];
@@ -93,7 +97,7 @@ class ReservationService {
         $userId = $_POST['userId']; 
         $title = $_POST['title'];
 
-        if ($this->isAlreadyBooked($salleId, $day,$startHourId, $endHourId)) {
+        if ($this->isAlreadyBooked($salleId, $day,$startHourId, $endHourId, $organismId)) {
             return array("error" => true, "message" => "Ce créneau est déjà réservé.");
         }
 
@@ -107,8 +111,8 @@ class ReservationService {
         }
 
     	$stmt = $this->connection->prepare("
-            INSERT INTO reservation (id, salleId, day, startHourId, endHourId, numGuests, userId, title) 
-            VALUES (NULL, :salleId, :day, :startHourId, :endHourId, :numGuests, :userId, :title)
+            INSERT INTO reservation (id, salleId, day, startHourId, endHourId, numGuests, userId, title, organismId) 
+            VALUES (NULL, :salleId, :day, :startHourId, :endHourId, :numGuests, :userId, :title, :organismId)
             ");
 
     	$stmt->bindParam(':salleId', $salleId);
@@ -118,12 +122,13 @@ class ReservationService {
         $stmt->bindParam(':numGuests', $numGuests);
         $stmt->bindParam(':userId', $userId);
         $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':organismId', $organismId);
     	$stmt->execute();
 
         return array("error" => false, "message" => "La réservation a bien été créée.");
     }
 
-    public function updateReservation($reservationId) {
+    public function updateReservation($organismId, $reservationId) {
         /* update a reservation */
 
         $salleId = $_POST['salleId'];
@@ -173,7 +178,7 @@ class ReservationService {
         return array("error" => false, "message" => "La réservation a bien été mise à jour.");
     }
 
-    public function deleteReservation($reservationId) {
+    public function deleteReservation($organismId, $reservationId) {
         /* delete a reservation */
     	$stmt = $this->connection->prepare("
             DELETE FROM reservation 
