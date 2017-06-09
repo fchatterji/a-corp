@@ -1,7 +1,6 @@
 <?php include "Partials/header.php"; ?>
 <?php include "Partials/loggedInNav.php"; ?>
 
-
 <div class="row">
     <?php foreach ($organismList as $organism): ?>
 
@@ -11,11 +10,13 @@
                 <div class="caption">
                     <h3><?php echo $organism['name'] ?></h3>
 
-                    <p>Vous êtes le <?php echo $organism['role'] ?> de ce groupe</p>
+                    <img src="<?php echo $organism['logo'] ?>" alt="" style="width:50px;height:50px;">
 
-                    <a href="/<?php echo $organism['organismId'] ?>/organisms/droits" class="btn btn-alert">Gérer les droits</a>
+                    <p>Votre rôle: <?php echo $organism['role'] ?></p>
 
+                    <a href="/<?php echo $organism['id'] ?>/organisms/droits" class="btn btn-alert">Gérer les droits</a>
 
+                    <a href="/<?php echo $organism['id'] ?>/reservations/<?php echo $day ?>" class="btn btn-alert">Accéder aux réservations</a>
 
                     <p>
                         <!-- Button trigger delete modal -->
@@ -58,7 +59,12 @@
                                 <input type="text" required name="name" id="name" class="form-control" value="<?php echo htmlspecialchars($organism['name']); ?>">
                             </div>
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                            <div class="form-group">
+                                <label for="name">URL du logo de l'organisme</label>
+                                <input type="text" name="logo" id="logo" value="<?php echo htmlspecialchars($organism['logo']); ?>" class="form-control">
+                            </div>
+
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 
                             <button type="submit" class="btn btn-primary pull-right">Modifier le groupe</button>
                         </form>
@@ -133,6 +139,11 @@
                         <div class="form-group">
                             <label for="name">Nom</label>
                             <input type="text" required name="name" id="name" placeholder="Nom" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">URL du logo de l'organisme:</label>
+                            <input type="text" name="logo" id="logo" placeholder="Entrez l'URL de votre logo" class="form-control">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Ajouter un groupe</button>

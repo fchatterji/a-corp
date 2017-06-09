@@ -11,8 +11,15 @@
                 <div class="caption">
                     <h3><?php echo $salle['name'] ?></h3>
                     <p>
+                        Adresse: <?php echo $salle['adress'] ?>
+                    </p>
+                    <p>
                         <?php echo $salle['places'] ?> places
                     </p>
+
+                    <img src="<?php echo $salle['image'] ?>" alt="" style="width:304px;height:228px;">
+
+                    <br><br>
 
                     <p>
                         <!-- Button trigger delete modal -->
@@ -59,6 +66,16 @@
                                 <label for="places">Nombre de places</label>
                                 <input type="number" required name="places" id="places" class="form-control" value="<?php echo htmlspecialchars($salle['places']); ?>">
                             </div>
+
+                            <div class="form-group">
+                                <label for="name">Adresse</label>
+                                <input type="text" name="adress" id="adress" class="form-control" value="<?php echo htmlspecialchars($salle['adress']); ?>">
+                            </div>
+
+                        <div class="form-group">
+                            <label for="name">URL d'une image</label>
+                            <input type="text" name="image" id="image" value="<?php echo htmlspecialchars($salle['image']); ?>" class="form-control">
+                        </div>
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 
@@ -131,7 +148,7 @@
                 <!-- Modal Body -->
                 <div class="modal-body">
 
-                    <form action="/<?php echo $organismId ?>/salle/create" method="post">
+                    <form action="/<?php echo $organismId ?>/salle/create" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name">Nom</label>
                             <input type="text" required name="name" id="name" placeholder="Nom" class="form-control">
@@ -141,6 +158,18 @@
                             <label for="places">Nombre de places</label>
                             <input type="number" required name="places" id="places" placeholder="Nombre de places" class="form-control">
                         </div>
+
+                        <div class="form-group">
+                            <label for="name">Adresse</label>
+                            <input type="text" name="adress" id="adress" placeholder="Adresse" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">URL d'une image</label>
+                            <input type="text" name="image" id="image" placeholder="Entrez l'URL de votre image" class="form-control">
+                        </div>
+
+
                         <button type="submit" class="btn btn-primary">Ajouter une salle</button>
                     </form>
 

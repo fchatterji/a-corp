@@ -14,6 +14,7 @@ class ReservationControler {
         $this->salleService = new SalleService();
         $this->possibleHoursService = new PossibleHoursService();
         $this->authService = new AuthService();
+        $this->settingService = new SettingService();
     }
 
     public function getReservationList($organismId, $day) {
@@ -34,6 +35,9 @@ class ReservationControler {
 
         // make organism variable available in the view
         $organismId = $organismId;
+
+        // get settings for the view
+        $settings = $this->settingService->getSettings($organismId);
 
         // make $day variables available in the view
         $day = $day;

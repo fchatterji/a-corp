@@ -8,7 +8,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <p class="navbar-brand">A-corp</p>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,7 +20,7 @@
                     <a href="/<?php echo $organismId ?>/organisms">Groupes</a>
                 </li>
                 <li class="nav-salle">
-                    <a href="/<?php echo $organismId ?>/salles"><span class="glyphicon glyphicon-lock"></span> Salles</a>
+                    <a href="/<?php echo $organismId ?>/salles">Salles</a>
                 </li>
             </ul>
 
@@ -33,8 +32,6 @@
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
-                    <li class="nav-logout"><a href="">Accueil</a></li>
-                    <li class="nav-logout"><a href="/logout">Mon profil</a></li>
                     <li class="nav-logout"><a href="/<?php echo $organismId ?>/settings">Paramètres</a></li>
                     <li class="nav-logout"><a href="/logout">Se déconnecter</a></li>
                   </ul>

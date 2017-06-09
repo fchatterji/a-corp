@@ -11,13 +11,17 @@ class OrganismService {
         $this->connection = Connexion::init();
     }
 
-    public function getOrganismList() {
+    public function getOrganismList($userId) {
         /* get all organisms for a given user */
         $stmt = $this->connection->prepare("
             SELECT *
             FROM organism 
+            LEFT JOIN 
+                (SELECT userId, organismId, role FROM membership WHERE userId=:userId) AS m 
+            ON organism.id=m.organismId
         ");
 
+        $stmt->bindParam(':userId', $userId);
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -68,14 +72,14 @@ class OrganismService {
             $name = 'default';
         }
 
-
         
         $stmt = $this->connection->prepare("
-            INSERT INTO organism (id, name) 
-            VALUES (NULL, :name)
+            INSERT INTO organism (id, name, logo) 
+            VALUES (NULL, :name, :logo)
         ");
 
         $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':logo', $logo);
         $stmt->execute();
     }
 
@@ -83,15 +87,17 @@ class OrganismService {
         /* update an organism */
 
         $name = $_POST['name'];
+        $logo = $_POST['logo'];
 
         $stmt = $this->connection->prepare("
             UPDATE organism 
-            SET name=:name 
+            SET name=:name, logo=:logo 
             WHERE id=:organismId
         ");
 
         $stmt->bindParam(':organismId', $organismId);
         $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':logo', $logo);
         $stmt->execute();   
     }
 
@@ -104,6 +110,25 @@ class OrganismService {
 
         $stmt->bindParam(':organismId', $organismId);
         $stmt->execute();
+    }
+
+    public function findCurrentUserOrganism($userId) {
+        /* find the organism of the current user */
+        $stmt = $this->connection->prepare("
+            SELECT organism.id
+            FROM organism
+            JOIN membership ON organism.id=membership.organismId
+            WHERE membership.userId=:userId
+            AND membership.role = 'owner'
+        ");
+
+        $stmt->bindParam(':userId', $userId);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+        $result = $stmt->fetch();
+
+        return $result;
     }
 }
 

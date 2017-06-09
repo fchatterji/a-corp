@@ -52,9 +52,6 @@ $router->get('/logout', function() {
 // SALLES
 $router->get('/(\d+)/salles', function($organismId) { 
 
-    $adminGuardControler = new AdminGuardControler();
-    $adminGuardControler->preventAccessIfNotAdmin();
-
     $loginGuardControler = new LoginGuardControler();
     $loginGuardControler->preventAccessIfNotLoggedIn();
 
@@ -139,8 +136,26 @@ $router->post('/(\d+)/reservation/delete/(\d+)', function($organismId, $reservat
 // SETTINGS
 $router->get('/(\d+)/settings', function($organismId) { 
 
-    $controler = new SettingsControler();
+    $controler = new SettingControler();
     $controler->get($organismId);
+});
+
+$router->post('/(\d+)/setting/create', function($organismId) { 
+
+    $controler = new SettingControler();
+    $controler->post($organismId);
+});
+
+$router->post('/(\d+)/setting/update/(\d+)', function($organismId, $settingId) {
+
+    $controler = new SettingControler();
+    $controler->put($organismId, $settingId);
+});
+
+$router->post('/(\d+)/setting/delete/(\d+)', function($organismId, $settingId) { 
+
+    $controler = new SettingControler();
+    $controler->delete($organismId, $settingId);
 });
 
 

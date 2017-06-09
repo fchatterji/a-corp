@@ -52,14 +52,16 @@ class SalleService {
 
         $name = $_POST['name'];
         $places = $_POST['places'];
+        $adress = $_POST['adress'];
         
     	$stmt = $this->connection->prepare("
-            INSERT INTO salle (id, name, places, organismId) 
-            VALUES (NULL, :name, :places, :organismId)
+            INSERT INTO salle (id, name, places, adress, organismId) 
+            VALUES (NULL, :name, :places, :adress, :organismId)
         ");
 
     	$stmt->bindParam(':name', $name);
     	$stmt->bindParam(':places', $places);
+        $stmt->bindParam(':adress', $adress);
         $stmt->bindParam(':organismId', $organismId);
     	$stmt->execute();
     }
@@ -69,15 +71,17 @@ class SalleService {
 
         $name = $_POST['name'];
         $places = $_POST['places'];
+        $adress = $_POST['adress'];
 
     	$stmt = $this->connection->prepare("
             UPDATE salle 
-            SET name=:name, places=:places 
+            SET name=:name, places=:places, adress=:adress 
             WHERE id=:salleId
         ");
 
     	$stmt->bindParam(':salleId', $salleId);
     	$stmt->bindParam(':name', $name);
+        $stmt->bindParam(':adress', $adress);
     	$stmt->bindParam(':places', $places);
     	$stmt->execute();	
     }

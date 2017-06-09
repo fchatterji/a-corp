@@ -7,6 +7,7 @@ class LoginControler {
 
     public function __construct() {
         $this->authService = new AuthService();
+        $this->organismService = new organismService();
     }
 
     public function get() {
@@ -40,7 +41,9 @@ class LoginControler {
             setcookie('authID', $array["hash"], $expire); 
             // redirect to reservations page
             $day =  $date = date('Y-m-d');
-            header("Location: /reservations/".$day);
+            $userId = $this->authService->getUserId();
+            $organismId = $this->organismService->findCurrentUserOrganism(5);
+            header("Location: {$organismId[id]}/reservations/".$day);
             exit();            
         }
     }
